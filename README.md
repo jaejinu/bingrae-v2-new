@@ -20,6 +20,19 @@ python3 -m http.server 4175
 | `/` | 메인 (Moments · Icons · Look Closer · Time · Stories · Featured · Today · Your Moment · News) |
 | `/brandbook` | 단지, 기록으로 만나는 50년 |
 | `/icons/{banana-milk,bravo,samanco,yoplait}` | 제품별 상세 |
+| `/branding/` | 별도로 추가한 빙그레 브랜드 스토리 페이지 |
+| `/banana-milk/` | 별도로 추가한 바나나맛우유 페이지 |
+| `/banana-milk/bravo/` | 바나나맛우유에서 연결되는 부라보콘 페이지 |
+
+## 추가 페이지 작업 안내
+
+기존 메인, `/brandbook`, `/icons/banana-milk`는 변경하지 않았습니다.
+새로운 브랜드 페이지 작업은 `branding/`, 바나나맛우유 작업은 `banana-milk/`에서 진행합니다.
+각 폴더에는 HTML, CSS, JavaScript와 필요한 이미지가 함께 들어 있습니다.
+기존 Nuxt 번들과 독립된 HTML 페이지이므로 기존 앱에서 연결할 때는
+`<a href="/branding/">브랜드 이야기</a>`, `<a href="/banana-milk/">바나나맛우유</a>`처럼
+일반 링크로 이동하세요. 생성된 Nuxt 번들에 라우트를 직접 추가할 필요가 없습니다.
+상세 인계 사항은 `PAGE-HANDOFF.md`를 참고하세요.
 
 ## 구조
 
