@@ -1,4 +1,6 @@
 const menu=document.querySelector('.menu'),nav=document.querySelector('#nav');
+const sectionInteractions=document.createElement('script');
+sectionInteractions.src='interactions.js';document.body.append(sectionInteractions);
 const motionPreference=matchMedia('(prefers-reduced-motion: reduce)');
 const bigName=document.querySelector('.big-name');
 document.querySelector('.smile path').setAttribute('pathLength','1');
