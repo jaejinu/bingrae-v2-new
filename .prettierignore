@@ -1,0 +1,9 @@
+# Nuxt가 생성한 빌드 결과물입니다. 자동 정렬하면 hydration이 깨져
+# 메인 인트로 버튼 등이 동작하지 않으므로 포맷터를 적용하지 마세요.
+/index.html
+/brandbook/
+/icons/
+/_nuxt/
+/_startup-fixed/
+/_external/
+/enhancements/vendor/
