@@ -45,6 +45,19 @@
       queueMicrotask(() => { queued = false; updateLinks(); });
     }).observe(document.body, { childList: true, subtree: true });
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
-  else start();
+  // Touching Nuxt-rendered markup before hydration makes Vue patch the wrong nodes
+  // (the burger button loses its class), so wait until hydration has finished.
+  function startAfterHydration() {
+    const startedAt = Date.now();
+    (function wait() {
+      const nuxt = document.getElementById('__nuxt')?.__vue_app__?.$nuxt;
+      if (nuxt) {
+        if (nuxt.isHydrating) nuxt.hooks.hookOnce('app:suspense:resolve', () => setTimeout(start));
+        else start();
+      } else if (Date.now() - startedAt > 10000) start();
+      else setTimeout(wait, 50);
+    })();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startAfterHydration, { once: true });
+  else startAfterHydration();
 })();
