@@ -2,7 +2,8 @@
 (() => {
   const links = [
     { href: '/branding/', label: '브랜드', selector: '.header__side.--start' },
-    { href: '/banana-milk/', label: '바나나맛우유', selector: '.header__side.--end' }
+    { href: '/banana-milk/', label: '바나나맛우유', selector: '.header__side.--end' },
+    { href: '/bravo/', label: '부라보콘', selector: '.header__side.--end' }
   ];
   function appendLink(nav, item, mobile = false) {
     if (!nav || nav.querySelector(`[data-page-link="${item.href}"]`)) return;
@@ -23,14 +24,18 @@
     document.querySelectorAll('a[href="/icons/banana-milk"],a[href="/icons/banana-milk/"]').forEach(link => {
       link.href = '/banana-milk/';
     });
+    document.querySelectorAll('a[href="/icons/bravo"],a[href="/icons/bravo/"]').forEach(link => {
+      link.href = '/bravo/';
+    });
   }
   // Capture before the existing app's delegated click handlers.
   window.addEventListener('click', event => {
     const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
     if (!link) return;
     const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin || !['/branding/', '/banana-milk/', '/icons/banana-milk', '/icons/banana-milk/'].includes(url.pathname)) return;
-    if (url.pathname.startsWith('/icons/')) url.pathname = '/banana-milk/';
+    if (url.origin !== location.origin || !['/branding/', '/banana-milk/', '/bravo/', '/icons/banana-milk', '/icons/banana-milk/', '/icons/bravo', '/icons/bravo/'].includes(url.pathname)) return;
+    if (url.pathname.startsWith('/icons/bravo')) url.pathname = '/bravo/';
+    else if (url.pathname.startsWith('/icons/')) url.pathname = '/banana-milk/';
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
     event.preventDefault();
     event.stopImmediatePropagation();
