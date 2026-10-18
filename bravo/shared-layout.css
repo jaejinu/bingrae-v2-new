@@ -22,13 +22,7 @@ body.menu-open{overflow:hidden}
 .footer .footer__tag{font-size:clamp(32px,4vw,68px)}
 .footer .footer__en{font-family:var(--font-en-display);font-weight:400;line-height:.9;text-transform:uppercase;margin:0}
 .footer .footer__bar{line-height:1.55;text-align:center}
-main>.hero{padding-inline:var(--gutter);padding-top:110px;height:100svh;min-height:850px}
-.hero-bottom{left:var(--gutter);right:var(--gutter)}
-main>.section,main>.history{width:75%;margin-inline:auto}
-main>.section{padding-inline:var(--gutter)}
-.history .sticky{padding-inline:var(--gutter)}
-main>.history .section-top{padding-top:30px}
-main>.closing{width:100%}
+
 @media(max-width:1000px){.header .header__side.--end{gap:14px}.header .header__link{display:none}}
-@media(max-width:640px){main>.hero{padding-top:110px;min-height:900px}.hero .scene{top:350px}.hero h1{margin-top:30px}.header__bar{min-height:40px}.shared-motion{width:30px;height:30px}.footer .footer__bar{flex-direction:column;font-size:12px}.history .sticky{padding-top:75px}.history h2{font-size:32px}.history-grid{gap:15px;margin-block:14px}.time-card{min-height:200px}.chapter-copy{min-height:68px;font-size:10px}.tabs{margin:14px 0}.unit{font-size:10px}.time-card>small{font-size:7px}.number{font-size:65px}.taste-art{min-height:350px}.disc{width:210px;height:210px}.taste-art img{width:440px;height:470px}.backword{font-size:clamp(26px,9vw,42px)}.ingredients button strong{font-size:20px}.ingredients button{gap:9px}.play-head h2,.taste-head h2,.cut h2{font-size:32px}.hero .meta{font-size:7px}}
+@media(max-width:640px){.header__bar{min-height:40px}.shared-motion{width:30px;height:30px}.footer .footer__bar{flex-direction:column;font-size:12px}}
 @media(min-width:1001px){.header .shared-mobile{display:none}}
