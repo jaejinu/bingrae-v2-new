@@ -5,13 +5,19 @@
 
 ## 실행
 
-빌드 과정 없이 루트 디렉터리를 정적 서버로 실행하면 됩니다. 경로가 `/`로 시작하므로 `index.html`을 파일로 바로 열면 동작하지 않습니다.
+> **`npm install`은 필요 없습니다.** 이 저장소는 이미 빌드된 정적 파일이라 `package.json`이 없고, `npm install`을 실행하면 오류가 납니다.
+
+저장소 루트에서 정적 서버만 띄우면 됩니다. 경로가 `/`로 시작하므로 `index.html`을 파일로 바로 열면 동작하지 않습니다.
 
 ```bash
+node start-preview.mjs    # 별도 설치 없이 실행 → http://127.0.0.1:4175/
+# 또는
 npx serve .
 # 또는
 python3 -m http.server 4175
 ```
+
+포트를 바꾸려면 `PORT=3000 node start-preview.mjs`처럼 실행합니다.
 
 ## 페이지
 
