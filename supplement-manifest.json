@@ -1,0 +1,38 @@
+[
+  {
+    "url": "https://binggrae-moment-five.vercel.app/enhancements/preloader-logo.mjs",
+    "file": "enhancements/preloader-logo.mjs",
+    "bytes": 8794,
+    "status": "saved"
+  },
+  {
+    "url": "https://binggrae-moment-five.vercel.app/enhancements/preloader-products.mjs",
+    "file": "enhancements/preloader-products.mjs",
+    "bytes": 7403,
+    "status": "saved"
+  },
+  {
+    "url": "https://binggrae-moment-five.vercel.app/enhancements/hero-sequence.mjs",
+    "file": "enhancements/hero-sequence.mjs",
+    "bytes": 10917,
+    "status": "saved"
+  },
+  {
+    "url": "https://binggrae-moment-five.vercel.app/_nuxt/builds/meta/70093960-bf9c-4b4d-9ec3-629f8d414efb.json",
+    "file": "_nuxt/builds/meta/70093960-bf9c-4b4d-9ec3-629f8d414efb.json",
+    "bytes": 88,
+    "status": "saved"
+  },
+  {
+    "url": "https://binggrae-moment-five.vercel.app/enhancements/hero-shatter.mjs",
+    "file": "enhancements/hero-shatter.mjs",
+    "bytes": 5347,
+    "status": "saved"
+  },
+  {
+    "url": "https://binggrae-moment-five.vercel.app/enhancements/products/banana-milk.png",
+    "file": "enhancements/products/banana-milk.png",
+    "bytes": 1331190,
+    "status": "saved"
+  }
+]

@@ -1,0 +1,239 @@
+@font-face {
+  font-family: 'Paperlogy';
+  src: url('/fonts/Paperlogy-8ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+.page .moments .moments__label {
+  font-family: 'Paperlogy', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+}
+
+/* Center the main sections; horizontal product slides keep their full width. */
+html {
+  scrollbar-gutter: stable;
+}
+
+.page {
+  --section-width: 75%;
+}
+
+.page section:not(.icons):not(.hero) {
+  width: var(--section-width);
+  margin-inline: auto;
+}
+
+/* Give the moment list and product card equal 47% columns on desktop. */
+.page .moments__grid > * {
+  min-width: 0;
+}
+
+@media (min-width: 901px) {
+  .page .moments .moments__grid {
+    grid-template-columns: repeat(2, minmax(0, 47%));
+    justify-content: space-between;
+    column-gap: 0;
+  }
+}
+
+/* Allow form controls to shrink inside the narrower mobile column. */
+.page .ym__grid > *,
+.page .ym__input {
+  min-width: 0;
+}
+
+/* The detail viewer opens with the same approved artwork as the preloader. */
+.page .look__art {
+  position: absolute;
+  inset: 8% 10% 20%;
+  display: grid;
+  place-items: center;
+}
+
+.page .look__art .product-art {
+  min-height: 0;
+  animation: none;
+}
+
+@media (max-width: 800px), (pointer: coarse) {
+  .page .look__art {
+    inset: 20px 30px 132px;
+  }
+}
+
+.page #moments.moments--cinema {
+  min-height: 100svh;
+  height: 100svh;
+  padding-block: clamp(100px, 12vh, 150px) 40px;
+  position: relative;
+}
+.moments--cinema .moments__panel.card {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+.moments--cinema .moments__art,
+.moments--cinema .moments__spark { display: none !important; }
+.moments--cinema .moments__detail { width: 100%; }
+.moments-cinema {
+  position: absolute;
+  width: min(640px, 80vw, 75vh);
+  height: min(720px, 85vw, 80vh);
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.moments-cinema canvas, .moments-cinema__still {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain;
+}
+#moments .hero__shards { z-index: 5; overflow: visible; }
+@media(max-width:900px) {
+  .page #moments.moments--cinema {height: auto; min-height: 100svh;}
+  .moments--cinema .moments__grid {gap: 24px;}
+}
+.page #moments.moments--cinema {
+  width: 100%;
+  padding-inline: 12.5%;
+  background: #ff9ebd;
+}
+@media(max-width:900px) {
+  .page #moments.moments--cinema {padding-inline: 6%;}
+}
+/* Match the marked compact package footprint using the approved latest cutout. */
+.moments-cinema {
+  width: clamp(220px, 19vw, 370px);
+  height: clamp(240px, 39vh, 390px);
+}
+.moments-cinema__still { transform-origin: 50% 50%; }
+
+/* Yoplait icon: align the smaller circle with the marked product area. */
+@media (min-width: 901px) {
+  .page #icons .icon-panel .icon-panel__shape {
+    width: min(43vw, 58vh);
+    left: 25.5%;
+    top: 52%;
+    translate: -50% -50%;
+  }
+  .page #icons .icon-panel .icon-panel__art {
+    width: min(18vw, 26vh);
+  }
+}
+.page #icons .icon-panel .icon-panel__desc {
+  margin-top: 30px;
+}
+
+/* Keep the opening background full bleed before, during and after pinning. */
+.page section.hero {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  background: #ffd43b;
+}
+.page .hero__pin {
+  width: 100%;
+  max-width: none;
+  background: #ffd43b;
+}
+
+.moments-cinema__sparkles {position:absolute;inset:0;pointer-events:none;}
+.moments-cinema__star {
+  position:absolute;width:32px;height:32px;overflow:visible;
+  transform-origin:center;
+  animation: moments-star-twinkle 1.5s ease-in-out infinite;
+  animation-delay:var(--spark-delay);
+}
+.moments-cinema__star:nth-child(1){left:-8%;top:18%;width:38px;height:38px;}
+.moments-cinema__star:nth-child(2){right:-9%;top:31%;width:26px;height:26px;}
+.moments-cinema__star:nth-child(3){left:2%;bottom:15%;width:24px;height:24px;}
+.moments-cinema__star:nth-child(4){right:1%;bottom:6%;width:34px;height:34px;}
+@keyframes moments-star-twinkle {
+  0%,100% {opacity:.25;transform:scale(.65) rotate(-12deg);}
+  50% {opacity:1;transform:scale(1.12) rotate(12deg);}
+}
+@media(prefers-reduced-motion:reduce){
+  html:not([data-motion=full]) .moments-cinema__star {animation:none;opacity:1;}
+}
+
+/* The post-Yoplait scene contains only the animated message in the marked zone. */
+.page #moments.moments--cinema > .section-head {
+  position:absolute;left:12.5%;top:35%;width:69%;height:30%;
+  margin:0;display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.page #moments.moments--cinema > .section-head > .kicker,
+.page #moments.moments--cinema > .moments__grid {display:none !important;}
+.page #moments.moments--cinema > .section-head h2 {
+  margin:0;width:100%;font-size:clamp(36px,5.3vw,94px);line-height:1.2;
+}
+.moments-copy-line {display:block;white-space:nowrap;}
+.moments-copy-letter {display:inline-block;transform-origin:50% 85%;}
+@media(max-width:600px){
+  .page #moments.moments--cinema > .section-head {left:5%;width:90%;}
+  .page #moments.moments--cinema > .section-head h2 {font-size:clamp(28px,6vw,40px);}
+}
+
+/* Shared icon composition: fixed title anchor and separated Korean/details rows. */
+@media(min-width:901px){
+ .page #icons .icon-panel__art {position:absolute;left:25.5%;top:52%;translate:-50% -50%;}
+ .page #icons .icon-panel__text {position:absolute;left:50%;top:37%;width:45%;gap:14px;}
+ .page #icons .icon-panel__text > .ko-display {margin-top:46px;}
+ .page #icons .icon-panel .icon-panel__desc {margin-top:0;}
+}
+.icon-product-canvas {position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+.icon-product-ready > .product-art {visibility:hidden;}
+
+@media(min-width:901px){.page #icons .icon-panel__art[data-stage="bravo"]{width:min(27vw,39vh);}}
+
+/* Center the complete two-line message independently of the former content columns. */
+.page #moments.moments--cinema > .section-head {
+  left:0;top:0;width:100%;height:100%;padding:0 5%;box-sizing:border-box;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.page #moments.moments--cinema > .section-head h2 {margin:0;text-align:center;}
+
+/* Keep decorative stars around the reading area, never on the letters. */
+.moments-copy-stars {position:absolute;inset:0;pointer-events:none;visibility:hidden;}
+#moments[data-moments-phase="text"] .moments-copy-stars {visibility:visible;}
+.moments-copy-star {position:absolute;overflow:visible;animation:copy-star-pulse 2.2s ease-in-out infinite;animation-delay:var(--delay);transform-origin:center;}
+.moments-copy-star:nth-child(1){left:41%;top:25%;width:52px;height:52px;}
+.moments-copy-star:nth-child(2){left:58%;top:28%;width:28px;height:28px;}
+.moments-copy-star:nth-child(3){left:23%;top:42%;width:34px;height:34px;}
+.moments-copy-star:nth-child(4){right:22%;top:40%;width:58px;height:58px;}
+body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!important;}
+@keyframes copy-star-pulse {0%,100%{opacity:.35;transform:scale(.65) rotate(-8deg);}50%{opacity:1;transform:scale(1.15) rotate(8deg);}}
+@media(max-width:900px){
+ .moments-copy-star:nth-child(3){left:7%;top:35%;}
+ .moments-copy-star:nth-child(4){right:6%;top:33%;width:42px;height:42px;}
+}
+@media(prefers-reduced-motion:reduce){.moments-copy-star{animation:none;opacity:1;}}
+
+/* Compact Look Closer composition following the marked title, controls and cards. */
+@media(min-width:901px){
+ .page #look-closer > .section-head {margin-bottom:28px;}
+ .page #look-closer > .section-head h2 {font-size:clamp(38px,4.4vw,84px);line-height:1.12;white-space:nowrap;margin-top:40px;}
+ .page #look-closer .look__tabs {margin-bottom:32px;gap:10px;}
+ .page #look-closer .look__grid {grid-template-columns:1.2fr 1fr;gap:3.3vw;align-items:start;}
+ .page #look-closer .look__stage {height:48vh;min-height:360px;max-height:520px;aspect-ratio:auto;}
+ .page #look-closer .look__art {inset:0;display:flex;align-items:center;justify-content:center;padding:40px 0 60px;}
+ .page #look-closer .look__art .product-art {width:35%;height:76%;max-height:330px;flex:none;}
+ .page #look-closer .look__text {gap:14px;}
+ .page #look-closer .look__play {padding:16px 20px;gap:8px;margin-bottom:36px;}
+ .page #look-closer .look__play h3 {font-size:20px;line-height:1.2;}
+ .page #look-closer .look__play > .btn {padding:8px 18px;min-height:36px;font-size:14px;}
+ .page #look-closer .look__play label {font-size:13px;gap:4px;}
+ .page #look-closer .look__q {font-size:clamp(28px,3vw,56px);line-height:1.2;margin:0;}
+ .page #look-closer .look__a {font-size:clamp(15px,1.1vw,20px);line-height:1.6;margin:0;}
+}
+@media(max-width:900px){
+ .page #look-closer > .section-head h2 {font-size:clamp(25px,5.4vw,46px);line-height:1.25;}
+ .page #look-closer .look__art {inset:48px 25% 110px;}
+ .page #look-closer .look__play h3 {font-size:20px;}
+}
+
+/* Simplified product information and direct detail link. */
+.page #look-closer .look__play,.page #look-closer .look__details{display:none!important;}
+@media(min-width:901px){.page #look-closer .look__text{align-self:center;}.page #look-closer .look__text > .btn{margin-top:4px;}}

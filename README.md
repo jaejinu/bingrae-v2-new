@@ -1,42 +1,45 @@
-# 부라보콘 제품 페이지
+# 빙그레할 틈 — Everyday moments of small joy
 
-빙그레 부라보콘 제품 페이지 디자인 콘셉트입니다. 외부 프레임워크나 빌드 과정 없이 HTML/CSS/JavaScript로 구성했습니다.
+빙그레 브랜드 리뉴얼 콘셉트 사이트(개인 포트폴리오, 비공식)의 정적 빌드본입니다.
+`binggrae-moment-five.vercel.app`에서 저장한 Nuxt SSG 결과물이며 원본 Nuxt 소스는 포함되어 있지 않습니다.
 
 ## 실행
 
-`public/index.html`을 바로 열거나 정적 서버로 실행하세요.
+빌드 과정 없이 루트 디렉터리를 정적 서버로 실행하면 됩니다. 경로가 `/`로 시작하므로 `index.html`을 파일로 바로 열면 동작하지 않습니다.
 
 ```bash
-npx serve public
+npx serve .
 # 또는
-python3 -m http.server 4173 -d public
+python3 -m http.server 4175
 ```
+
+## 페이지
+
+| 경로 | 내용 |
+|---|---|
+| `/` | 메인 (Moments · Icons · Look Closer · Time · Stories · Featured · Today · Your Moment · News) |
+| `/brandbook` | 단지, 기록으로 만나는 50년 |
+| `/icons/{banana-milk,bravo,samanco,yoplait}` | 제품별 상세 |
 
 ## 구조
 
 ```
-public/
-├── index.html        # 마크업 (header · hero · story · flavor · moment · footer)
-├── style.css         # 기본 레이아웃과 반응형
-├── celebration.css   # 아트 디렉션 덮어쓰기 (색상 토큰, 장식, 애니메이션, 모바일 메뉴)
-├── script.js         # 스크롤 진행 바, 등장 효과, 맛 탭, 하트 버튼, 모바일 메뉴
-└── assets/
-    ├── bravo.png     # 부라보콘 바닐라 제품 이미지
-    └── favicon.svg
+index.html              # 메인 페이지 (SSR 결과 + __NUXT_DATA__)
+brandbook/, icons/      # 하위 페이지
+_startup-fixed/         # 메인 페이지가 쓰는 Nuxt 번들 (buildAssetsDir)
+_nuxt/                  # 하위 페이지가 쓰는 Nuxt 번들 (_startup-fixed와 내용 동일)
+_external/              # Google Fonts, Pretendard 로컬 사본
+enhancements/           # 프리로더, 히어로 시퀀스 등 추가 스크립트(three.js 포함)와 제품 이미지
+models/teum/            # 제품 3D 모델 (.glb)
+images/, archive/, products/, icons/, fonts/
+download-manifest.json, supplement-manifest.json   # 저장 기록 (배포 제외)
 ```
-
-`celebration.css`는 `style.css` 다음에 로드되어 같은 선택자를 덮어씁니다. 색상 토큰(`:root`)도 `celebration.css` 값이 최종 적용됩니다.
 
 ## 배포
 
-Vercel 정적 배포이며 `vercel.json`의 `outputDirectory`가 `public`입니다.
+Vercel 정적 배포입니다. GitHub `main`에 push하면 자동 배포되며, `.vercelignore`에 적힌 파일은 배포에서 제외됩니다.
 
 ## 메모
 
-- 기존 사이트에는 `main` 내부 섹션과 스타일을 이식할 수 있습니다. header와 footer는 예시입니다.
-- 800px 이하에서는 header 메뉴가 햄버거 버튼 + 드롭다운으로 바뀝니다. 링크 클릭, Esc, 바깥 클릭으로 닫힙니다.
-- 폰트는 Google Fonts의 Noto Sans KR을 사용하며 네트워크가 없으면 시스템 글꼴로 표시됩니다.
-- 출시 55년과 누적 판매 수치는 2025년 기준입니다.
-- 하트 인사 버튼은 화면 효과이며 서버에 데이터를 저장하지 않습니다.
-
-참고: https://www.bing.co.kr/product/detail?PDT=191 · https://binggrae-moment.vercel.app/?diagnose=1 · https://www.planetono.space/
+- 모바일(헤더의 "메뉴" 버튼)은 Nuxt 앱에 이미 구현되어 있습니다.
+- `/images/story-*.jpg` 5개는 원본 사이트에서도 404라 포함되어 있지 않습니다.

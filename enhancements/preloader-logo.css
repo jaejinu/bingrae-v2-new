@@ -1,0 +1,117 @@
+.pre[tabindex="-1"]:focus {
+  outline: none;
+}
+
+/* The archived ProductArt component is retained for hydration only. */
+.pre .pre__row .product-art {
+  display: none;
+}
+
+.pre .pre__row.pre__row--large {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  height: clamp(150px, 32vh, 300px);
+  gap: clamp(6px, 2vw, 32px);
+  perspective: 1100px;
+  isolation: isolate;
+}
+
+.pre .pre__row--large .pre__item {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  transform-origin: center;
+}
+
+.pre__product-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 75%;
+}
+
+.pre__product-image {
+  position: absolute;
+  display: block;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 16px 13px rgb(95 60 0 / 15%));
+}
+
+.pre__row--large[data-product-motion="loading"] .pre__item {
+  visibility: hidden;
+}
+
+@media (max-width: 600px) {
+  .pre .pre__row.pre__row--large {
+    height: clamp(130px, 38vw, 210px);
+  }
+}
+
+.pre__logo {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  overflow: visible;
+  isolation: isolate;
+  white-space: nowrap;
+}
+
+.pre__logo-letter,
+.pre__logo-wave,
+.pre__logo-glyph {
+  display: inline-block;
+  position: relative;
+  transform-origin: 50% 85%;
+}
+
+.pre__logo-letter {
+  flex: 0 0 auto;
+}
+
+.pre__logo-space {
+  width: .24em;
+}
+
+.pre__logo-star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: .74em;
+  height: .74em;
+  margin: -.37em 0 0 -.37em;
+  overflow: visible;
+  opacity: 0;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+.pre__logo-star path {
+  fill: var(--cream, #fff6e0);
+  stroke: var(--ink, #1a1a1a);
+  stroke-width: 2.4;
+  stroke-linejoin: round;
+}
+
+.pre__logo-flight {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 1100;
+  margin: 0;
+  max-width: none;
+  pointer-events: none;
+  transform-origin: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion="full"]) .pre__logo-star {
+    display: none;
+  }
+}

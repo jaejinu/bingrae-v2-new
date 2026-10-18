@@ -1,0 +1,241 @@
+.header .header__link[data-v-16c163cb] {
+  font-size: 13px;
+}
+
+/* Match the annotated desktop header bounds without crowding narrower screens. */
+@media (min-width: 1001px) {
+  html .header.header {
+    padding-top: max(24px, env(safe-area-inset-top));
+  }
+
+  .header .header__side[data-v-16c163cb] {
+    gap: calc(clamp(14px, 2vw, 32px) - 20px);
+  }
+
+  .header .header__bar.container {
+    position: relative;
+    left: clamp(-16px, calc(660px - 50vw), 0px);
+    width: calc(100% - 64px);
+    max-width: 1290px;
+    padding-inline: 0;
+  }
+}
+
+/* Keep the schedule inside the inset area before the words disperse. */
+.hero .hero__pin .hero__schedule {
+  inset: 16% 8% 28%;
+  padding: 0;
+  display: grid;
+  /* Six two-track words plus one spare track for alternating row offsets. */
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1vw, 16px) 0;
+  align-content: stretch;
+  align-items: center;
+  justify-items: center;
+}
+
+.hero .hero__pin .hero__token {
+  grid-column: auto / span 2;
+  font-size: clamp(24px, 3.3vw, 64px);
+  visibility: hidden;
+  transform-origin: 50% 50%;
+  /* Relative positioning stays independent of GSAP's entrance/scatter transforms. */
+  position: relative;
+  top: -6px;
+}
+
+.hero .hero__pin .hero__token:nth-child(even) { top: 6px; }
+.hero .hero__pin .hero__token:nth-child(12n + 1) { grid-column: 1 / span 2; }
+.hero .hero__pin .hero__token:nth-child(12n + 7) { grid-column: 2 / span 2; }
+
+.hero .hero__pin .hero__token small {
+  font-family: Pretendard, sans-serif;
+  font-size: clamp(10px, .86vw, 16px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+}
+
+/* Clipped copies carry the actual glyphs, including the outlined accent words. */
+.hero__shards {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+.hero__shard {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.hero .hero__pin .hero__intro {
+  top: 47%;
+  left: 50%;
+  bottom: auto;
+  translate: none;
+  transform: translate(-50%, -50%);
+  gap: 0;
+  z-index: 3;
+}
+
+.hero .hero__pin .hero__question {
+  position: relative;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  font-size: clamp(28px, 4.5vw, 72px);
+  padding: .5em .7em .3em;
+  max-width: 100%;
+  transform: rotate(-4.4deg);
+  margin: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* The two tagline cards reveal their surface after the letter bounce finishes. */
+.hero .hero__pin .hero__tag-line::before {
+  content: '';
+  position: absolute;
+  inset: calc(-1 * var(--stroke));
+  z-index: -1;
+  background: var(--cream);
+  border: var(--stroke) solid var(--ink);
+  border-radius: inherit;
+  box-shadow: var(--shadow);
+  opacity: var(--copy-panel-opacity, 0);
+  pointer-events: none;
+}
+
+.hero .hero__pin .hero__tag-line {
+  isolation: isolate;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding: .5em .5em .3em;
+  visibility: hidden;
+}
+
+.hero .hero__product .product-art {
+  display: none;
+}
+
+.hero__product-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 12px rgb(95 60 0 / 13%));
+  user-select: none;
+  pointer-events: none;
+}
+
+.hero__motion-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.hero__motion-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero__motion-letter {
+  display: inline-block;
+  transform-origin: 50% 85%;
+}
+
+.hero .hero__pin .hero__scroll {
+  position: absolute;
+  top: calc(100% + 32px);
+  left: 50%;
+  translate: none;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 108px;
+  min-height: 44px;
+  margin: 0;
+  padding: 8px 18px;
+  font-family: Pretendard, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+  cursor: pointer;
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hero .hero__pin .hero__scroll:hover {
+  background: var(--banana);
+}
+
+.hero .hero__pin .hero__scroll:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+
+.hero .hero__pin .hero__disclaimer {
+  font-family: Pretendard, sans-serif;
+  letter-spacing: -.02em;
+  line-height: 1.3;
+}
+
+@media (max-width: 760px) {
+  .hero .hero__pin .hero__intro {
+    left: 50%;
+    width: calc(100% - 48px);
+  }
+
+  .hero .hero__pin .hero__question {
+    font-size: clamp(24px, 6.2vw, 36px);
+    text-wrap: balance;
+  }
+
+  .hero .hero__pin .hero__schedule {
+    inset: 14% 6% 19%;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-rows: repeat(10, minmax(0, 1fr));
+    gap: 6px 0;
+  }
+
+  .hero .hero__pin .hero__token {
+    flex-direction: column;
+    gap: 2px;
+    font-size: clamp(20px, 5.4vw, 36px);
+    top: -3px;
+  }
+
+  .hero .hero__pin .hero__token:nth-child(even) { top: 3px; }
+  .hero .hero__pin .hero__token:nth-child(n) { grid-column: auto / span 2; }
+  .hero .hero__pin .hero__token:nth-child(6n + 1) { grid-column: 1 / span 2; }
+  .hero .hero__pin .hero__token:nth-child(6n + 4) { grid-column: 2 / span 2; }
+
+  .hero .hero__pin .hero__token small {
+    margin-top: 0;
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 540px) and (min-width: 761px) {
+  .hero .hero__pin .hero__token { font-size: min(3.3vw, 7vh); }
+}
+
+/* The opening retains its own yellow surface during background-trigger refreshes. */
+.hero .hero__pin { background: #ffd43b; }
+html { overflow-anchor: none; }
