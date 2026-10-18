@@ -1,9 +1,11 @@
 /* Independent static pages must use full-document navigation, not Nuxt routing. */
+// 싸만코 메뉴 추가 
 (() => {
   const links = [
     { href: '/branding/', label: '브랜드', selector: '.header__side.--start' },
     { href: '/banana-milk/', label: '바나나맛우유', selector: '.header__side.--end' },
-    { href: '/bravo/', label: '부라보콘', selector: '.header__side.--end' }
+    { href: '/bravo/', label: '부라보콘', selector: '.header__side.--end' },
+    { href: '/samanco-v2', label: '싸만코', selector: '.header__side.--end' }
   ];
   function appendLink(nav, item, mobile = false) {
     if (!nav || nav.querySelector(`[data-page-link="${item.href}"]`)) return;
@@ -33,7 +35,13 @@
     const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
     if (!link) return;
     const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin || !['/branding/', '/banana-milk/', '/bravo/', '/icons/banana-milk', '/icons/banana-milk/', '/icons/bravo', '/icons/bravo/'].includes(url.pathname)) return;
+    // 싸만코 메뉴 추가 
+    if (url.origin !== location.origin || ![
+        '/branding/', '/banana-milk/', '/bravo/',
+        '/samanco-v2', '/samanco-v2/',
+        '/icons/banana-milk', '/icons/banana-milk/',
+        '/icons/bravo', '/icons/bravo/'
+    ].includes(url.pathname)) return;
     if (url.pathname.startsWith('/icons/bravo')) url.pathname = '/bravo/';
     else if (url.pathname.startsWith('/icons/')) url.pathname = '/banana-milk/';
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') return;
