@@ -46,11 +46,49 @@
   const eras=[...document.querySelectorAll('.history-era')];
   const image=document.querySelector('#archive-history-art');
   const dates=['1967 — 1999','2000 — 2019','2020 — TODAY'];
-  const pictures=[['../banana-milk/assets/banana.png','바나나맛우유 현재 패키지'],['assets/melona-white.png','흰색 배경의 메로나 제품 이미지'],['assets/vivacity-white.png','흰색 배경의 비바시티 제품 이미지']];
+  const pictures=[['../banana-milk/assets/banana.png','바나나맛우유 현재 패키지'],['assets/melona-white.png','흰색 배경의 메로나 제품 이미지'],['assets/vivacity-decor.png','꽃과 열매로 꾸민 비바시티 배경']];
   let selected=-1,queued=false;
   const historyPanel=document.querySelector('.history-sticky');
   const year=document.querySelector('#history-year');
   const eraCaption=document.querySelector('#history-caption');
+  const splash=document.createElement('div');
+  splash.className='history-milk-splash';
+  splash.setAttribute('aria-hidden','true');
+  image.parentElement.append(splash);
+  const productLayer=document.createElement('div');
+  productLayer.className='vivacity-product-layer';
+  productLayer.hidden=true;
+  const productPosition=document.createElement('div');
+  const productImage=new Image();
+  productImage.src='assets/vivacity-product.png';
+  productImage.alt='비바시티 눈건강 젤리 제품';
+  productPosition.append(productImage);
+  productLayer.append(productPosition);
+  image.parentElement.append(productLayer);
+  // Decorative droplets are separate from the product bitmap, so the packaging stays still.
+  const drops=Array.from({length:14},(_,index)=>{
+    const drop=document.createElement('i');
+    const angle=(index*360/14-100)*Math.PI/180;
+    drop.style.setProperty('--drop-delay',(index%4*.16)+'s');
+    drop.style.setProperty('--drop-size',(5+index%4*2)+'px');
+    splash.append(drop);
+    return {drop,angle};
+  });
+  function sizeSplash(){
+    const frame=image.parentElement;
+    const ratio=1420/1108;
+    const layerWidth=Math.min(frame.clientWidth,frame.clientHeight*ratio);
+    productLayer.style.width=layerWidth+'px';
+    productLayer.style.height=(layerWidth/ratio)+'px';
+    const radius=Math.min(image.parentElement.clientWidth,image.parentElement.clientHeight)*.49;
+    drops.forEach(({drop,angle})=>{
+      drop.style.setProperty('--drop-x',Math.cos(angle)*radius+'px');
+      drop.style.setProperty('--drop-y',Math.sin(angle)*radius*.86+'px');
+    });
+  }
+  if('ResizeObserver' in window)new ResizeObserver(sizeSplash).observe(image.parentElement);
+  else addEventListener('resize',sizeSplash);
+  sizeSplash();
   let transitions=[];
   pictures.forEach(([src])=>{const preload=new Image();preload.src=src});
   function showEra(index,stopped){
@@ -93,6 +131,14 @@
       ?historyPanel.getBoundingClientRect().bottom+40:innerHeight*.5;
     const active=eras.filter(era=>era.getBoundingClientRect().top<=trigger).at(-1)||eras[0];
     showEra(eras.indexOf(active),stopped);
+    // Use the stationary frame, not the animated image, for visibility checks.
+    const imageBounds=image.parentElement.getBoundingClientRect();
+    const melonaVisible=selected===1&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight;
+    splash.classList.toggle('is-playing',melonaVisible);
+    image.classList.toggle('is-melona-rising',melonaVisible);
+    image.classList.toggle('is-banana-spinning',selected===0&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight);
+    productLayer.hidden=selected!==2;
+    productLayer.classList.toggle('is-spinning',selected===2&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight);
     if(stopped){
       transitions.forEach(animation=>animation.cancel());
       historyPanel.querySelectorAll('.history-image-outgoing').forEach(node=>node.remove());
