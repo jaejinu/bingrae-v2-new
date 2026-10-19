@@ -1984,9 +1984,35 @@
       }
     </style>
     <style>
+      /* 수정 위치: 09 Your Moment — phys 영역 확대, ym__grid와 간격은 section 기본 여백(96px~180px)과 동일. HTML 내 스타일과 _startup-fixed/index.DTcE4f3e.css 동기화. */
+      /* 수정 위치: 09 ym__grid / phys 전용 글자 확대. 공통 타이포그래피는 유지합니다. */
+      #your-moment .ym__grid .kicker,
+      #your-moment .phys .kicker {
+        font-size: 17px;
+      }
+      #your-moment .ym__grid .btn:not(.ym__swatch),
+      #your-moment .phys .btn {
+        font-size: 17px;
+        white-space: normal;
+        height: auto;
+        padding-block: 10px;
+      }
+      #your-moment .ym__grid .btn--sm,
+      #your-moment .phys .btn--sm {
+        font-size: 15px;
+      }
+      #your-moment .ym__grid .body-m:not(.ym__count):not(.ym__card-product) {
+        font-size: 17px;
+      }
+      #your-moment .ym__grid .body-l {
+        font-size: clamp(18px, 1.4vw, 22px);
+      }
+      #your-moment .ym__grid .size-md {
+        font-size: clamp(25px, 2.5vw, 40px);
+      }
       .phys[data-v-06099248] {
         background: linear-gradient(#fff6e0, #fdeec8);
-        margin-top: clamp(32px, 5vh, 56px);
+        margin-top: clamp(96px, 16vh, 180px);
         overflow: hidden;
         position: relative;
       }
@@ -2001,20 +2027,20 @@
         padding: 14px;
       }
       .phys__controls label[data-v-06099248] {
-        font-size: 13px;
+        font-size: 15px;
       }
       .phys__controls select[data-v-06099248] {
         background: #fff;
         border: 2px solid var(--ink);
         border-radius: 12px;
         font: inherit;
-        font-size: 14px;
+        font-size: 16px;
         max-width: 100%;
         min-height: 44px;
         padding: 8px 12px;
       }
       .phys__canvas[data-v-06099248] {
-        height: clamp(280px, 38vh, 420px);
+        height: clamp(320px, 44vh, 480px);
         touch-action: pan-y;
       }
       .phys__canvas[data-v-06099248] canvas {
@@ -2023,7 +2049,7 @@
       .phys__hint[data-v-06099248] {
         display: flex;
         flex-direction: column;
-        font-size: 13px;
+        font-size: 15px;
         gap: 4px;
         margin: 14px 18px 0;
         max-width: calc(100% - 36px);
@@ -2051,11 +2077,12 @@
         gap: clamp(24px, 4vw, 64px);
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+      /* 수정 위치: ym__grid의 폼 여백 및 결과/빈 카드 크기 확대. 반응형 열 너비와 기존 모션 유지. */
       .ym__form[data-v-7715973e] {
         display: flex;
         flex-direction: column;
         gap: 24px;
-        padding: clamp(20px, 3vw, 36px);
+        padding: clamp(24px, 3.3vw, 40px);
       }
       .ym__reasons[data-v-7715973e] {
         border: 0;
@@ -2078,7 +2105,7 @@
         background: #fff;
         border: var(--stroke) solid var(--ink);
         border-radius: 14px;
-        font-size: 17px;
+        font-size: 19px;
         font-weight: 500;
         min-height: 56px;
         outline: none;
@@ -2089,7 +2116,7 @@
       }
       .ym__count[data-v-7715973e] {
         bottom: 16px;
-        font-size: 12px;
+        font-size: 14px;
         opacity: 0.5;
         position: absolute;
         right: 16px;
@@ -2110,18 +2137,18 @@
           10px 10px 0 var(--c),
           12px 12px 0 var(--ink);
         gap: 8px;
-        min-height: 480px;
+        min-height: 528px;
         overflow: hidden;
         padding: 28px;
         position: relative;
         transform: rotate(-3deg);
-        width: min(100%, 380px);
+        width: min(100%, 420px);
       }
       .ym__card-kicker[data-v-7715973e] {
-        font-size: 20px;
+        font-size: 22px;
       }
       .ym__emoji[data-v-7715973e] {
-        font-size: 56px;
+        font-size: 62px;
         margin-top: 12px;
       }
       .ym__card-art[data-v-7715973e] {
@@ -2139,12 +2166,12 @@
         width: 100%;
       }
       .ym__card-product[data-v-7715973e] {
-        font-size: 12px;
+        font-size: 14px;
         position: relative;
         z-index: 1;
       }
       .ym__card-brand[data-v-7715973e] {
-        font-size: 20px;
+        font-size: 22px;
         margin-top: auto;
       }
       .ym__card > .body-l[data-v-7715973e] {
@@ -2159,7 +2186,7 @@
         display: grid;
         place-items: center;
         text-align: center;
-        width: min(100%, 380px);
+        width: min(100%, 420px);
       }
       .ym__wall[data-v-7715973e] {
         display: flex;
@@ -3439,7 +3466,7 @@
                     rel="noopener"
                     class="time__source"
                     data-v-b9d77a1e
-                    >자료 <!--: 빙그레 공식 기록--></a
+                    >자료</a
                   ></div
                 ></article
               ><article class="time__item" data-v-b9d77a1e
@@ -3457,7 +3484,7 @@
                     rel="noopener"
                     class="time__source"
                     data-v-b9d77a1e
-                    >자료<!-- : 빙그레 공식 기록 --></a
+                    >자료</a
                   ></div
                 ></article
               ><article class="time__item" data-v-b9d77a1e
@@ -3475,7 +3502,7 @@
                     rel="noopener"
                     class="time__source"
                     data-v-b9d77a1e
-                    >자료<!-- : 빙그레 공식 기록 --></a
+                    >자료</a
                   ></div
                 ></article
               ><article class="time__item" data-v-b9d77a1e
@@ -3493,7 +3520,7 @@
                     rel="noopener"
                     class="time__source"
                     data-v-b9d77a1e
-                    >자료: 빙그레 공식 기록</a
+                    >자료</a
                   ></div
                 ></article
               ><!--]--></div
@@ -3989,7 +4016,7 @@
                   ><p class="body-m" data-v-6426a67b>단지 하나에 담긴 오늘의 장면</p></article
                 ><!--]--></div
               ><p class="today__note body-m" data-v-6426a67b
-                >브랜드 리뉴얼을 위해 제작한 콘셉트 이미지와 콘텐츠입니다.</p
+                ></p
               ></div
             ></section
           ><section id="your-moment" class="ym section" data-v-f40455b8 data-v-7715973e
