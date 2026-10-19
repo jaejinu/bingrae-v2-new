@@ -51,6 +51,31 @@
   const historyPanel=document.querySelector('.history-sticky');
   const year=document.querySelector('#history-year');
   const eraCaption=document.querySelector('#history-caption');
+  const pointerDevice=matchMedia('(hover: hover) and (pointer: fine)');
+  const productFrame=image.parentElement;
+  let pointerFrame=0;
+  function resetProductTilt(){
+    cancelAnimationFrame(pointerFrame);
+    pointerFrame=0;
+    image.style.removeProperty('--product-x');
+    image.style.removeProperty('--product-y');
+    image.style.removeProperty('--product-tilt');
+  }
+  productFrame.addEventListener('pointermove',event=>{
+    if(!pointerDevice.matches||!image.classList.contains('is-banana-floating'))return;
+    cancelAnimationFrame(pointerFrame);
+    const x=event.clientX,y=event.clientY;
+    pointerFrame=requestAnimationFrame(()=>{
+      const box=productFrame.getBoundingClientRect();
+      const dx=Math.max(-1,Math.min(1,(x-box.left)/box.width*2-1));
+      const dy=Math.max(-1,Math.min(1,(y-box.top)/box.height*2-1));
+      image.style.setProperty('--product-x',dx*7+'px');
+      image.style.setProperty('--product-y',dy*4+'px');
+      image.style.setProperty('--product-tilt',dx*4+'deg');
+    });
+  },{passive:true});
+  productFrame.addEventListener('pointerleave',resetProductTilt);
+  productFrame.addEventListener('pointercancel',resetProductTilt);
   const splash=document.createElement('div');
   splash.className='history-milk-splash';
   splash.setAttribute('aria-hidden','true');
@@ -136,9 +161,11 @@
     const melonaVisible=selected===1&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight;
     splash.classList.toggle('is-playing',melonaVisible);
     image.classList.toggle('is-melona-rising',melonaVisible);
-    image.classList.toggle('is-banana-spinning',selected===0&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight);
+    const bananaVisible=selected===0&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight;
+    image.classList.toggle('is-banana-floating',bananaVisible);
+    if(!bananaVisible)resetProductTilt();
     productLayer.hidden=selected!==2;
-    productLayer.classList.toggle('is-spinning',selected===2&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight);
+    productLayer.classList.toggle('is-floating',selected===2&&!stopped&&imageBounds.bottom>0&&imageBounds.top<innerHeight);
     if(stopped){
       transitions.forEach(animation=>animation.cancel());
       historyPanel.querySelectorAll('.history-image-outgoing').forEach(node=>node.remove());
