@@ -1897,14 +1897,18 @@
     </style>
     <style>
       .today[data-v-6426a67b] {
+        /* 독립 마퀴의 margin-block으로 간격을 제어하므로 Today의 중복 위 여백 제거. */
+        padding-top: 0;
         overflow: hidden;
       }
-      /* 수정: 마퀴는 전체 폭의 독립 띠로 표시합니다. 아래 간격은 .section의 위 여백과 동일한 clamp 값입니다. */
+      /* 마퀴 복구: 반복 span 앞뒤의 <!--[--> / <!--]-->는 Nuxt Fragment 표식입니다. 삭제하거나 요소 사이에 공백 노드를 추가하면 클라이언트 복원 구조와 달라집니다. aria-hidden은 시각적 숨김이 아닙니다. */
+      /* 수정: 마퀴는 전체 폭의 독립 띠로 표시합니다. 상하 간격은 margin-block 한 곳에서 동일하게 제어합니다. */
       .today__marquee[data-v-6426a67b] {
         width: 100%;
         background: var(--banana);
         border-block: var(--stroke) solid var(--ink);
-        margin-bottom: clamp(96px, 16vh, 180px);
+        /* featured와 today 사이의 독립 영역: 전체 폭, 상하 동일 여백. */
+        margin-block: clamp(96px, 16vh, 180px);
         overflow: hidden;
       }
       .today__marquee-inner[data-v-6426a67b] {
@@ -2038,11 +2042,12 @@
         outline: 2px solid #1a1a1a;
         outline-offset: 3px;
       }
+      /* 수정: 긴 폼/결과 콘텐츠가 열 너비를 늘려 좌우 여백을 침범하지 않도록 최소 너비를 0으로 설정. */
       .ym__grid[data-v-7715973e] {
         align-items: start;
         display: grid;
         gap: clamp(24px, 4vw, 64px);
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .ym__form[data-v-7715973e] {
         display: flex;
@@ -3838,27 +3843,23 @@
 
           
 
-          <section id="today" class="today section" data-v-f40455b8 data-v-6426a67b>
-            
-            <div class="today__marquee" aria-hidden="true" data-v-6426a67b>
-              <div class="today__marquee-inner en-display" data-v-6426a67b>
-                <span data-v-6426a67b
-                  >NEW PRODUCT ✦ COLLABORATION ✦ CAMPAIGN ✦ POP-UP ✦ BRAND FILM ✦ </span
-                ><span data-v-6426a67b
-                  >NEW PRODUCT ✦ COLLABORATION ✦ CAMPAIGN ✦ POP-UP ✦ BRAND FILM ✦ </span
-                >
-              </div>
-            </div>
-           
-            <div class="container" data-v-6426a67b
-              ><div class="section-head" data-v-6426a67b
-                ><span class="kicker" data-v-6426a67b>08 — Binggrae Today</span
+          <div
+            id="today-marquee"
+            class="today__marquee"
+            aria-hidden="true"
+            data-v-f40455b8
+            data-v-6426a67b
+            ><div class="today__marquee-inner en-display" data-v-f40455b8 data-v-6426a67b
+              ><!--[--><span data-v-f40455b8
+                >NEW PRODUCT ✦ COLLABORATION ✦ CAMPAIGN ✦ POP-UP ✦ BRAND FILM ✦ </span
+              ><span data-v-f40455b8
+                >NEW PRODUCT ✦ COLLABORATION ✦ CAMPAIGN ✦ POP-UP ✦ BRAND FILM ✦ </span
+              ><!--]--></div
+            ></div
+          ><section id="today" class="today section" data-v-f40455b8 data-v-6426a67b><div class="section-head" data-v-6426a67b
                 ><h2 class="ko-display size-xl sticker-text" data-v-6426a67b
-                  >빙그레는 오늘도 새로운 틈을 만듭니다.</h2
-                ><p class="body-l" data-v-6426a67b
-                  >네 가지 아이콘 너머, 더 다양한 맛과 함께 만나는 새로운 즐거움.</p
-                ></div
-              ><div class="today__cards" data-v-6426a67b
+                  >빙그레는 오늘도<br data-v-6426a67b />새로운 틈을 만듭니다.</h2
+                ></div><div class="container" data-v-6426a67b><div class="today__cards" data-v-6426a67b
                 ><!--[--><article class="today__card card" data-v-6426a67b
                   ><div class="today__thumb" style="background: #cfe78e" data-v-6426a67b
                     ><svg

@@ -26,8 +26,12 @@ html {
   margin-inline: auto;
 }
 
-/* 수정: Today의 마퀴는 100% 폭, 아래 상품 콘텐츠만 기존 섹션 폭을 유지합니다. */
-.page .today > .container {
+/* 수정: Today와 Your Moment 콘텐츠를 동일한 75% 폭·중앙 정렬·좌우 패딩으로 맞춥니다. 독립 마퀴는 이 규칙에서 제외됩니다. */
+.page .today > .container,
+.page #your-moment {
+  box-sizing: border-box;
+  min-width: 0;
+  padding-inline: var(--gutter);
   width: var(--section-width);
   margin-inline: auto;
 }
@@ -172,6 +176,8 @@ html {
 }
 .page #moments.moments--cinema > .section-head > .kicker,
 .page #moments.moments--cinema > .moments__grid {display:none !important;}
+/* 수정: Today 슬로건은 Moments 제목의 글자 크기·줄간격을 공유합니다. */
+.page #today .section-head h2,
 .page #moments.moments--cinema > .section-head h2 {
   margin:0;width:100%;font-size:clamp(36px,5.3vw,94px);line-height:1.2;
 }
@@ -179,6 +185,7 @@ html {
 .moments-copy-letter {display:inline-block;transform-origin:50% 85%;}
 @media(max-width:600px){
   .page #moments.moments--cinema > .section-head {left:5%;width:90%;}
+  .page #today .section-head h2,
   .page #moments.moments--cinema > .section-head h2 {font-size:clamp(28px,6vw,40px);}
 }
 
@@ -199,6 +206,7 @@ html {
   left:0;top:0;width:100%;height:100%;padding:0 5%;box-sizing:border-box;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
+.page #today .section-head h2,
 .page #moments.moments--cinema > .section-head h2 {margin:0;text-align:center;}
 
 /* Keep decorative stars around the reading area, never on the letters. */
@@ -243,3 +251,27 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
 /* Simplified product information and direct detail link. */
 .page #look-closer .look__play,.page #look-closer .look__details{display:none!important;}
 @media(min-width:901px){.page #look-closer .look__text{align-self:center;}.page #look-closer .look__text > .btn{margin-top:4px;}}
+
+/* 수정: Today는 전체 화면 슬로건 장면 후 상품 카드가 이어집니다. Moments 별 클래스/키프레임을 공유합니다. */
+.page #today > .section-head {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 60px 5%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  isolation: isolate;
+}
+.page #today > .section-head h2 {
+  position: relative;
+  z-index: 1;
+}
+.page #today > .section-head .moments-copy-stars {
+  visibility: visible;
+  z-index: 0;
+}

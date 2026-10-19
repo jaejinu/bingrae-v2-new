@@ -157,7 +157,16 @@ html.has-cursor input {
 .cursor-spark {
   border: 2px solid #1a1a1a;
   border-radius: 0;
-  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  clip-path: polygon(
+    50% 0,
+    62% 38%,
+    100% 50%,
+    62% 62%,
+    50% 100%,
+    38% 62%,
+    0 50%,
+    38% 38%
+  );
   height: 10px;
   margin: -5px 0 0 -5px;
   pointer-events: none;
@@ -1044,7 +1053,10 @@ li:last-child .moments__item[data-v-f1f7e58e] {
 .time__item[data-v-b9d77a1e] > .article-content .time__source[data-v-b9d77a1e] {
   /* margin-left: auto; */
 }
-.time__item[data-v-b9d77a1e] > .article-content .time__source[data-v-b9d77a1e] .body-m {
+.time__item[data-v-b9d77a1e]
+  > .article-content
+  .time__source[data-v-b9d77a1e]
+  .body-m {
   min-height: 46.5px;
 }
 /* 출처 링크: 기존 URL/새 창 열기는 유지하고 작은 버튼으로 표시합니다. */
@@ -1516,14 +1528,17 @@ li:last-child .moments__item[data-v-f1f7e58e] {
   }
 }
 .today[data-v-6426a67b] {
+  /* 독립 마퀴의 margin-block으로 간격을 제어하므로 Today의 중복 위 여백 제거. */
+  padding-top: 0;
   overflow: hidden;
 }
-/* 수정: 마퀴는 전체 폭의 독립 띠로 표시합니다. 아래 간격은 .section의 위 여백과 동일한 clamp 값입니다. */
+/* 수정: 마퀴는 전체 폭의 독립 띠로 표시합니다. 상하 간격은 margin-block 한 곳에서 동일하게 제어합니다. */
 .today__marquee[data-v-6426a67b] {
   width: 100%;
   background: var(--banana);
   border-block: var(--stroke) solid var(--ink);
-  margin-bottom: clamp(96px, 16vh, 180px);
+  /* featured와 today 사이의 독립 영역: 전체 폭, 상하 동일 여백. */
+  margin-block: clamp(96px, 16vh, 180px);
   overflow: hidden;
 }
 .today__marquee-inner[data-v-6426a67b] {
@@ -1653,11 +1668,12 @@ li:last-child .moments__item[data-v-f1f7e58e] {
   outline: 2px solid #1a1a1a;
   outline-offset: 3px;
 }
+/* 수정: 긴 폼/결과 콘텐츠가 열 너비를 늘려 좌우 여백을 침범하지 않도록 최소 너비를 0으로 설정. */
 .ym__grid[data-v-7715973e] {
   align-items: start;
   display: grid;
   gap: clamp(24px, 4vw, 64px);
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .ym__form[data-v-7715973e] {
   display: flex;
