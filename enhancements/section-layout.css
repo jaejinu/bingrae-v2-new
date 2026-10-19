@@ -177,7 +177,7 @@ html {
 .page #moments.moments--cinema > .section-head > .kicker,
 .page #moments.moments--cinema > .moments__grid {display:none !important;}
 /* 수정: Today 슬로건은 Moments 제목의 글자 크기·줄간격을 공유합니다. */
-.page #today .section-head h2,
+.page #today-slogan > .section-head h2,
 .page #moments.moments--cinema > .section-head h2 {
   margin:0;width:100%;font-size:clamp(36px,5.3vw,94px);line-height:1.2;
 }
@@ -185,7 +185,7 @@ html {
 .moments-copy-letter {display:inline-block;transform-origin:50% 85%;}
 @media(max-width:600px){
   .page #moments.moments--cinema > .section-head {left:5%;width:90%;}
-  .page #today .section-head h2,
+  .page #today-slogan > .section-head h2,
   .page #moments.moments--cinema > .section-head h2 {font-size:clamp(28px,6vw,40px);}
 }
 
@@ -206,7 +206,7 @@ html {
   left:0;top:0;width:100%;height:100%;padding:0 5%;box-sizing:border-box;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
-.page #today .section-head h2,
+.page #today-slogan > .section-head h2,
 .page #moments.moments--cinema > .section-head h2 {margin:0;text-align:center;}
 
 /* Keep decorative stars around the reading area, never on the letters. */
@@ -253,7 +253,7 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
 @media(min-width:901px){.page #look-closer .look__text{align-self:center;}.page #look-closer .look__text > .btn{margin-top:4px;}}
 
 /* 수정: Today는 전체 화면 슬로건 장면 후 상품 카드가 이어집니다. Moments 별 클래스/키프레임을 공유합니다. */
-.page #today > .section-head {
+.page #today-slogan > .section-head {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -267,11 +267,11 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
   text-align: center;
   isolation: isolate;
 }
-.page #today > .section-head h2 {
+.page #today-slogan > .section-head h2 {
   position: relative;
   z-index: 1;
 }
-.page #today > .section-head .moments-copy-stars {
+.page #today-slogan > .section-head .moments-copy-stars {
   visibility: visible;
   z-index: 0;
 }
@@ -293,3 +293,8 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
 .page #your-moment .ym__content > .phys {
   width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box;
 }
+
+/* 수정 위치: enhancements/section-layout.css — #today-slogan의 전체 화면·제목·별 스타일. 스크롤/분해는 enhancements/today-slogan.mjs에서 관리합니다. */
+/* 독립 슬로건만 전체 화면/스크롤 고정 대상. Today의 안내와 상품 카드는 일반 흐름. */
+.page #today-slogan { width: 100%; height: 100vh; height: 100svh; margin: 0; padding: 0; position: relative; }
+#today-slogan[data-slogan-phase="text-scatter"] .moments-copy-stars { visibility: hidden; }

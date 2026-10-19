@@ -1,3 +1,7 @@
+// 수정 위치: enhancements/today-slogan.mjs — 슬로건 글자 분해/역스크롤 복원.
+// 연결: _startup-fixed/0myL3wtN.js의 SectionTodaySlogan → index.html #today-slogan.
+// 분해 엔진: enhancements/hero-shatter.mjs의 createWordShatter (Moments와 동일).
+import { createWordShatter } from './hero-shatter.mjs';
 // Today 전용 전체 화면 슬로건. Moments의 글자 바운스 수치와 별 SVG/CSS를 그대로 재사용합니다.
 export function createTodaySlogan(root, { gsap, reducedMotion }) {
   const stage = root.querySelector(':scope > .section-head');
@@ -40,23 +44,43 @@ export function createTodaySlogan(root, { gsap, reducedMotion }) {
     stars.append(star);
   }
   stage.append(stars);
+  // Moments와 동일한 글자 조각 생성기, 90% 분해 지점, 88% 역스크롤 복원 지점을 사용합니다.
+  const shatter = createWordShatter(
+    stage,
+    letters.filter((letter) => letter.textContent !== '\u00a0'),
+    { gsap },
+  );
+  let reveal,
+    scroll,
+    scattered = false;
+  function restore() {
+    shatter.clear();
+    gsap.set(letters, {
+      autoAlpha: 1,
+      yPercent: 0,
+      scaleX: 1,
+      scaleY: 1,
+      rotation: 0,
+    });
+    scattered = false;
+    root.dataset.sloganPhase = 'text';
+  }
+  function finishCopy() {
+    if (scattered || !reveal || (scroll?.scrollTrigger?.progress ?? 0) < 0.9)
+      return;
+    scattered = true;
+    // 빠르게 스크롤해도 시간 대기로 분해가 생략되지 않도록 글자를 정렬한 뒤 조각냅니다.
+    reveal.progress(1, true);
+    gsap.set(letters, { yPercent: 0, scaleX: 1, scaleY: 1, rotation: 0 });
+    root.dataset.sloganPhase = 'text-scatter';
+    shatter.burst();
+  }
+  root.dataset.sloganPhase = 'text';
   const context = gsap.context(() => {
     if (reducedMotion()) return;
-    const reveal = gsap.timeline({
-      scrollTrigger: {
-        trigger: stage,
-        start: 'top 60%',
-        toggleActions: 'play none none restart',
-      },
-    });
-    reveal.from(heading, {
-      autoAlpha: 0,
-      y: 35,
-      duration: 0.45,
-      ease: 'power2.out',
-    });
+    reveal = gsap.timeline({ paused: true });
     letters.forEach((letter, index) => {
-      const at = 0.15 + index * 0.035;
+      const at = 1 + index * 0.035;
       reveal
         .to(letter, { scaleX: 1.12, scaleY: 0.82, duration: 0.08 }, at)
         .to(
@@ -84,9 +108,42 @@ export function createTodaySlogan(root, { gsap, reducedMotion }) {
           at + 0.28,
         );
     });
+    reveal.call(finishCopy, [], 7.5);
+    scroll = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: root,
+          start: 'top top',
+          end: () => '+=' + innerHeight * 3.5,
+          pin: true,
+          scrub: 0.35,
+          invalidateOnRefresh: true,
+          onEnter: () => {
+            restore();
+            reveal.restart();
+          },
+          onUpdate: (self) => {
+            if (scattered && self.progress < 0.88) restore();
+            finishCopy();
+          },
+          onLeaveBack: () => {
+            reveal.pause(0);
+            restore();
+          },
+          onRefresh: () => {
+            if (scattered) restore();
+          },
+        },
+      })
+      .to({}, { duration: 1 });
   }, stage);
   return () => {
+    reveal?.kill();
+    scroll?.scrollTrigger?.kill();
+    scroll?.kill();
+    shatter.clear();
     context.revert();
+    delete root.dataset.sloganPhase;
     stars.remove();
     heading.innerHTML = original;
     if (previousLabel === null) heading.removeAttribute('aria-label');
