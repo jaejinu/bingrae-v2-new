@@ -21,7 +21,13 @@ html {
   --section-width: 75%;
 }
 
-.page section:not(.icons):not(.hero) {
+.page section:not(.icons):not(.hero):not(.today) {
+  width: var(--section-width);
+  margin-inline: auto;
+}
+
+/* 수정: Today의 마퀴는 100% 폭, 아래 상품 콘텐츠만 기존 섹션 폭을 유지합니다. */
+.page .today > .container {
   width: var(--section-width);
   margin-inline: auto;
 }
