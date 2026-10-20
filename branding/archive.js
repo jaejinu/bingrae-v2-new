@@ -39,6 +39,21 @@
     lines.forEach((line,index)=>line.style.setProperty('--read',clamp(read*lines.length-index)*100+'%'));
     if(progress>.14){cancelAnimationFrame(frame);counter.textContent=String(lastYear)}
   }
+  // The per-year gallery owns history when present; retain era effects for older layouts.
+  if(document.querySelector('script[src="history-gallery.js"]')){
+    const updateIntro=()=>{
+      const stopped=reduce.matches||document.documentElement.classList.contains('site-motion-paused');
+      if(stopped){cancelAnimationFrame(frame);counter.textContent=String(lastYear)}
+      updateJourney(stopped);
+    };
+    let pending=false;
+    addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(()=>{pending=false;updateIntro()})}},{passive:true});
+    addEventListener('resize',updateIntro);
+    reduce.addEventListener('change',updateIntro);
+    new MutationObserver(updateIntro).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+    updateIntro();
+    return;
+  }
   const eras=[...document.querySelectorAll('.history-era')];
   const image=document.querySelector('#archive-history-art');
   const dates=['1967 — 1999','2000 — 2019','2020 — TODAY'];

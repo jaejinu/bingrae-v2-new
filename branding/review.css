@@ -1,4 +1,11 @@
 /* October review: homepage alignment, stable scenes and readable history. */
+.history-visual-source{display:block;margin:16px auto 0;font-size:11px;line-height:1.65;color:#777;max-width:95%;text-decoration:underline;text-underline-offset:4px}
+.history-sticky #history-caption{font-size:clamp(18px,1.8vw,27px);min-height:2.9em;display:flex;align-items:center;justify-content:center}
+.archive-history-image #archive-history-art{width:100%;height:100%;object-fit:contain;animation:none}
+.archive-history-image .history-image-outgoing{width:100%;height:100%;object-fit:contain}
+.history-era article{transition:opacity .25s}
+.history-era article.is-current-year h4{color:#b33922}
+@media(max-width:760px){.history-visual-source{font-size:10px;margin-top:8px}.history-sticky #history-caption{font-size:18px;min-height:2.4em}}
 :root{--brand-content-width:75%}
 .story-wrap{width:var(--brand-content-width);margin-inline:auto;padding-inline:0}
 .brand-meaning-surface{background:#fff6e0}
