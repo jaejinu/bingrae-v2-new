@@ -17,31 +17,27 @@
   const statement=document.querySelector('.archive-statement');
   const lines=[...statement.querySelectorAll('h2 span')];
   statement.classList.add('is-enhanced');
-  const scenes=[...document.querySelectorAll('.story-scene')];
-  const sceneModes=['down','fixed','up'];
-  scenes.forEach((scene,index)=>{scene.dataset.scrollMotion=sceneModes[index]});
-  function updateScenes(stopped){
-    const viewport=innerHeight;
-    // Read all geometry before writing transforms. Images stay clipped by their section.
-    const bounds=scenes.map(scene=>scene.getBoundingClientRect());
-    scenes.forEach((scene,index)=>{
-      const rect=bounds[index];
-      scene.classList.toggle('is-scroll-scene',!stopped);
-      if(stopped){
-        scene.style.removeProperty('--scene-image-y');
-        scene.style.removeProperty('--scene-image-height');
-        return;
-      }
-      const progress=Math.max(0,Math.min(1,(viewport-rect.top)/(viewport+rect.height)));
-      const travel=Math.min(viewport*.16,150);
-      const mode=sceneModes[index];
-      // Compensate page scrolling, then add independent viewport-space movement.
-      // Down: -2*travel -> 0. Fixed: 0. Up: 0 -> -2*travel.
-      const drift=mode==='down'?-2*travel*(1-progress):mode==='up'?-2*travel*progress:0;
-      const height=Math.max(viewport,rect.height)+(mode==='fixed'?0:2*travel);
-      scene.style.setProperty('--scene-image-height',height+'px');
-      scene.style.setProperty('--scene-image-y',(-rect.top+drift)+'px');
-    });
+  const journey=document.querySelector('.brand-journey');
+  const clamp=value=>Math.max(0,Math.min(1,value));
+  function updateJourney(stopped){
+    journey.classList.toggle('is-pinned',!stopped);
+    if(stopped){
+      lines.forEach(line=>line.style.setProperty('--read','100%'));
+      return;
+    }
+    const bounds=journey.getBoundingClientRect();
+    const progress=clamp(-bounds.top/Math.max(1,bounds.height-innerHeight));
+    const enter=clamp((progress-.14)/.18);
+    const exit=clamp((progress-.85)/.15);
+    const read=clamp((progress-.33)/.4);
+    journey.style.setProperty('--opening-opacity',1-enter);
+    journey.style.setProperty('--opening-y',(-enter*28)+'px');
+    journey.style.setProperty('--statement-opacity',enter*(1-exit));
+    journey.style.setProperty('--statement-y',((1-enter)*28-exit*24)+'px');
+    journey.style.setProperty('--description-opacity',clamp((read-.75)/.25));
+    journey.style.setProperty('--warmth',clamp((progress-.45)/.5));
+    lines.forEach((line,index)=>line.style.setProperty('--read',clamp(read*lines.length-index)*100+'%'));
+    if(progress>.14){cancelAnimationFrame(frame);counter.textContent=String(lastYear)}
   }
   const eras=[...document.querySelectorAll('.history-era')];
   const image=document.querySelector('#archive-history-art');
@@ -113,6 +109,9 @@
   }
   if('ResizeObserver' in window)new ResizeObserver(sizeSplash).observe(image.parentElement);
   else addEventListener('resize',sizeSplash);
+  if('ResizeObserver' in window)new ResizeObserver(entries=>{
+    historyPanel.style.setProperty('--history-panel-height',entries[0].contentRect.height+'px');
+  }).observe(historyPanel);
   sizeSplash();
   let transitions=[];
   pictures.forEach(([src])=>{const preload=new Image();preload.src=src});
@@ -146,11 +145,8 @@
   }
   function update(){
     queued=false;
-    const rect=statement.getBoundingClientRect();
-    const progress=Math.max(0,Math.min(1,(innerHeight*.9-rect.top)/(innerHeight*.7)));
     const stopped=reduce.matches||document.documentElement.classList.contains('site-motion-paused');
-    updateScenes(stopped);
-    lines.forEach((line,index)=>line.style.setProperty('--read',(stopped?100:Math.max(0,Math.min(1,progress*lines.length-index))*100)+'%'));
+    updateJourney(stopped);
     // On phones the timeline scrolls below a compact pinned image panel.
     const trigger=matchMedia('(max-width: 760px)').matches
       ?historyPanel.getBoundingClientRect().bottom+40:innerHeight*.5;
