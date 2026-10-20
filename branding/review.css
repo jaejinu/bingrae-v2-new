@@ -1,8 +1,9 @@
 /* October review: homepage alignment, stable scenes and readable history. */
 .history-visual-source{display:block;margin:16px auto 0;font-size:11px;line-height:1.65;color:#777;max-width:95%;text-decoration:underline;text-underline-offset:4px}
 .history-sticky #history-caption{font-size:clamp(18px,1.8vw,27px);min-height:2.9em;display:flex;align-items:center;justify-content:center}
-.archive-history-image #archive-history-art{width:100%;height:100%;object-fit:contain;animation:none}
-.archive-history-image .history-image-outgoing{width:100%;height:100%;object-fit:contain}
+.archive-history-image{display:grid;grid-template-rows:minmax(0,1fr);grid-template-columns:minmax(0,1fr);place-items:center}
+.archive-history-image #archive-history-art{width:100%;height:100%;max-width:var(--asset-width,100%);max-height:var(--asset-height,100%);object-fit:contain;animation:none}
+.archive-history-image .history-image-outgoing{width:100%;height:100%;max-width:var(--asset-width,100%);max-height:var(--asset-height,100%);object-fit:contain;margin:auto}
 .history-era article{transition:opacity .25s}
 .history-era article.is-current-year h4{color:#b33922}
 @media(max-width:760px){.history-visual-source{font-size:10px;margin-top:8px}.history-sticky #history-caption{font-size:18px;min-height:2.4em}}

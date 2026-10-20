@@ -5,7 +5,7 @@
   const records = {
     1967:['assets/history/milestone.png','공식 보고서의 빙그레 주요 연혁','2025 공식 보고서 · 연혁 자료',report+'#page=9'],
     1973:['assets/history/factory-2013.jpg','빙그레 남양주 공장 외관 · 2013년 보도 사진','2013 공장 자료 사진 · 일요시사','https://www.ilyosisa.co.kr/news/article.html?no=32250'],
-    1982:['assets/history/identity.png','빙그레 현재 로고 · 사명 변경 관련 참고 이미지','현재 로고 · 당시 로고가 아닌 참고 자료','https://www.bing.co.kr/'],
+    1982:['assets/history/identity.svg','빙그레 현재 로고 · 사명 변경 관련 참고 이미지','현재 로고 · 당시 로고가 아닌 참고 자료','https://commons.wikimedia.org/wiki/File:Binggrae_logo_(Korean).svg'],
     1987:['assets/history/research.png','2022~2024 연구개발비 · 연구 활동 참고 자료','2025 공식 보고서 · 최근 연구개발 자료',report+'#page=75'],
     1998:['assets/history/haccp.png','2025 보고서 수록 HACCP 인증서 · 최초 인증서가 아닌 참고 자료','2025 공식 보고서 · 품질 인증 참고 자료',report+'#page=76'],
     2002:['assets/history/vision.png','빙그레 경영 가치 체계 · 현재 비전 참고 자료','2025 공식 보고서 · 현재 경영 가치',report+'#page=6'],
@@ -32,7 +32,7 @@
   function load(src){
     if(!cache.has(src))cache.set(src,new Promise(resolve=>{
       const img=new Image();
-      img.onload=()=>resolve(true);img.onerror=()=>resolve(false);img.src=src;
+      img.onload=()=>resolve({width:img.naturalWidth,height:img.naturalHeight});img.onerror=()=>resolve(null);img.src=src;
     }));
     return cache.get(src);
   }
@@ -41,13 +41,18 @@
     selected=index;
     const token=++request,entry=entries[index];
     const value=entry.querySelector('time').textContent.trim(),record=records[value];
-    if(!await load(record[0])||token!==request)return;
+    const dimensions=await load(record[0]);
+    if(!dimensions||token!==request)return;
     animations.forEach(a=>a.cancel());animations=[];
     frame.querySelectorAll('.history-image-outgoing').forEach(node=>node.remove());
     const previous=image.cloneNode();
     const stopped=reduce.matches||document.documentElement.classList.contains('site-motion-paused');
     year.textContent=value;caption.textContent=entry.querySelector('h4').textContent;
     image.src=record[0];image.alt=record[1];
+    // Keep raster detail at two source pixels per CSS pixel; SVG scales freely.
+    const vector=record[0].endsWith('.svg');
+    image.style.setProperty('--asset-width',vector?'100%':dimensions.width/2+'px');
+    image.style.setProperty('--asset-height',vector?'100%':dimensions.height/2+'px');
     source.textContent=record[2]+' ↗';source.href=record[3];
     panel.dataset.activeYear=value;
     entries.forEach((node,i)=>{

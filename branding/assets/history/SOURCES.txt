@@ -8,6 +8,12 @@ https://www.bing.co.kr/upload/esg/2025%EB%85%84%20%EB%B9%99%EA%B7%B8%EB%A0%88%20
 These are document excerpts/reference materials from 2025, not photographs or documents from the associated historical event year.
 
 identity.png: current Binggrae logo, https://www.bing.co.kr/img/main/logo-pc.png
+identity.svg: Korean vector logo replacing the 144px header bitmap.
+https://commons.wikimedia.org/wiki/File:Binggrae_logo_(Korean).svg
+https://upload.wikimedia.org/wikipedia/commons/9/9b/Binggrae_logo_%28Korean%29.svg
+Commons identifies this as a PD-textlogo; trademark rights remain applicable.
+Report diagram crops were re-rendered at 288dpi on 2026-10-20.
+Embedded raster originals are preserved; display sizes are limited to avoid over-enlargement.
 font.png: official Binggrae font example, https://www.bing.co.kr/img/sub/news/font_example_img01.png
 Source page: https://www.bing.co.kr/news/media_font
 portfolio.png: official 2026 business portfolio, https://www.bing.co.kr/img/sub/company/business/banner-2026.png
