@@ -1,0 +1,27 @@
+/* Match the homepage's typography without importing its page layout. */
+@import url('/_external/cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@font-face{font-family:'Binggrae';font-weight:400;font-display:swap;src:local('Binggrae'),local('빙그레체')}
+@font-face{font-family:'Binggrae';font-weight:700;font-display:swap;src:local('Binggrae Bold'),local('빙그레체 Bold')}
+@font-face{font-family:'Paperlogy';src:url('/fonts/Paperlogy-8ExtraBold.woff2') format('woff2');font-weight:800;font-style:normal;font-display:swap}
+:root{
+  --font-ko-display:'Binggrae Samanco','Black Han Sans','Pretendard Variable',system-ui,sans-serif;
+  --font-ko-sub:'Binggrae','Pretendard Variable',system-ui,sans-serif;
+  --font-en-display:'Anton','Black Han Sans',Impact,sans-serif;
+  --font-body:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;
+}
+body{font-family:var(--font-body);-webkit-font-smoothing:antialiased}
+.archive-statement h2,.story-intro h2,.story-history .story-section-heading h2{
+  font-family:var(--font-ko-display);font-weight:400;letter-spacing:-.01em;
+}
+.story-scene h2{font-family:'Paperlogy',var(--font-ko-display);font-weight:800;letter-spacing:-.035em}
+.archive-opening p,.archive-statement p,.intro-copy>p:first-child,.history-sticky>p{
+  font-family:var(--font-ko-sub);
+}
+.archive-opening h1,.history-sticky>strong,.history-era time,.story-scene>div>span{
+  font-family:var(--font-en-display);font-weight:400;letter-spacing:.005em;
+}
+.history-era h4{font-family:var(--font-ko-sub);font-weight:700}
+@media(max-width:760px){
+  .archive-statement h2{font-size:clamp(16px,4.5vw,31px)}
+  .story-history .story-section-heading h2{font-size:clamp(26px,6.1vw,46px)}
+}

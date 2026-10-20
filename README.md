@@ -35,6 +35,8 @@ python3 -m http.server 4175
 | 경로 | 제목 | 작업 폴더 | 내용 |
 |---|---|---|---|
 | `/branding/` | 우리의 일상을, 빙그레 — Brand Story | `branding/` | 빙그레 브랜드 스토리 |
+| `/brand2/` | 빙그레 — 웃음의 기록 · Brand Story | `brand2/` | 브랜드 스토리 리디자인 시안 (공용 헤더 대신 자체 레이아웃) |
+| `/brand3/` | 우리의 모든 날에, 빙그레 — Brand Story | `brand3/` | 기존 브랜드 페이지 보완·디벨롭 시안 (연도 바로가기, 제품 섹션 추가) |
 | `/banana-milk/` | 바나나맛우유 — 단지, 행복한 순간 | `banana-milk/` | 바나나맛우유 제품 페이지 |
 | `/bravo/` | 부라보콘 — 하트 하나, 클래식 하나 | `bravo/` | 부라보콘 인터랙티브 제품 페이지 |
 | `/banana-milk/bravo/` | — | — | 예전 주소. `/bravo/`로 자동 이동 |
