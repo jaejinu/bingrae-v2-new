@@ -278,7 +278,11 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
 
 /* 구조 복구: 09의 모든 콘텐츠(제목/폼/결과/phys)를 하나의 중앙 컨테이너에 배치. */
 .page #your-moment { width: 100%; padding-inline: 0; }
-.page #your-moment > .ym__content { display: flow-root; }
+/*261020 테스트 */
+.page #your-moment > .ym__content { 
+  display: flow-root; 
+  /* width:98%; */
+}
 .page #your-moment .ym__head {
   display: flex;
   position: relative;
@@ -292,9 +296,30 @@ body:has(#moments[data-moments-phase="text"]:hover) .cursor {visibility:hidden!i
 .page #your-moment .ym__head > * { opacity: 1; visibility: visible; }
 .page #your-moment .ym__content > .phys {
   width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box;
+  margin-top: 20rem;
 }
 
 /* 수정 위치: enhancements/section-layout.css — #today-slogan의 전체 화면·제목·별 스타일. 스크롤/분해는 enhancements/today-slogan.mjs에서 관리합니다. */
 /* 독립 슬로건만 전체 화면/스크롤 고정 대상. Today의 안내와 상품 카드는 일반 흐름. */
 .page #today-slogan { width: 100%; height: 100vh; height: 100svh; margin: 0; padding: 0; position: relative; }
 #today-slogan[data-slogan-phase="text-scatter"] .moments-copy-stars { visibility: hidden; }
+
+
+
+/*262020*/
+@media (min-width: 901px) {
+  .page #icons .icon-panel__art {
+      /* left: 22.5%; */
+  }
+}
+
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .page {
+    --section-width: 90%;
+  }
+  .section {
+    padding-left:2%;
+    padding-right:2%;
+  }
+}

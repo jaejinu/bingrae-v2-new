@@ -1049,9 +1049,10 @@ li:last-child .moments__item[data-v-f1f7e58e] {
   gap: 0px;
   min-width: 0;
 }
-
+/*261020*/
 .time__item[data-v-b9d77a1e] > .article-content .time__source[data-v-b9d77a1e] {
-  /* margin-left: auto; */
+  margin-left: auto;
+  border: 1px solid #ccc;
 }
 .time__item[data-v-b9d77a1e]
   > .article-content
@@ -1243,8 +1244,9 @@ li:last-child .moments__item[data-v-f1f7e58e] {
   font-size: clamp(26px, 2.8vw, 46px);
 }
 /* 수정: 기존 카드 링크 안의 읽어보기 표시를 작은 버튼으로 디자인합니다. 중첩 링크/버튼을 만들지 않아 기존 클릭 동작을 유지합니다. */
+/* 261020 */
 .story__read[data-v-534d7a72] {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: fit-content;
@@ -1260,6 +1262,7 @@ li:last-child .moments__item[data-v-f1f7e58e] {
   transition:
     background-color 0.15s,
     color 0.15s;
+  margin-left: auto;
 }
 .story:hover .story__read[data-v-534d7a72],
 .story:focus-visible .story__read[data-v-534d7a72] {
