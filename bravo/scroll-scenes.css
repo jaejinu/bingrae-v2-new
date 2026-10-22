@@ -1,0 +1,53 @@
+/* Scroll-driven versions of the first three scenes; native wheel/touch scroll. */
+.b-scroll-scene{position:relative;isolation:isolate}
+.b-scroll-scene[data-scene="clock"]{background:var(--b-red)}
+.b-scroll-scene[data-scene="story"]{background:var(--b-cream)}
+.b-scroll-scene[data-scene="earth"]{background:#f4e6d0}
+.b-scroll-scene.is-pinned>section{position:sticky;top:0}
+.b-scroll-mode .b-intro{height:100svh;min-height:0;max-height:none;padding-top:105px;padding-bottom:115px}
+.b-scroll-mode .b-intro h1{font-size:clamp(50px,min(6.3vw,10svh),100px);margin-block:20px}
+.b-scroll-mode .b-dial{width:min(100%,57svh)}
+.b-scroll-mode .b-dial-controls{margin-top:15px}
+.b-scroll-mode .b-dial{cursor:default}
+.b-scroll-mode .b-story{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:85px;padding-bottom:35px}
+.b-scroll-mode .b-story-top{margin-bottom:25px}
+.b-scroll-mode .b-story-track{transition:none}
+.b-scroll-mode .b-story-track article{min-height:clamp(260px,46svh,370px);padding-block:40px}
+.b-scroll-mode .b-story-number{font-size:clamp(75px,min(13vw,20svh),190px)}
+.b-scroll-mode .b-story-dots{margin-top:20px}
+.b-scroll-mode .b-distance{min-height:100svh;padding-block:90px 40px}
+.b-scroll-mode .b-earth-scene{min-height:440px}
+.b-scroll-mode .b-earth{transform:rotate(var(--earth-turn,0deg));will-change:transform}
+.b-scroll-mode .b-earth-heart{transform:rotate(calc(-15deg - var(--earth-turn,0deg)))}
+.b-scroll-mode .b-cone-hand,.b-scroll-mode .b-earth-orbit{will-change:transform}
+.b-scroll-mode .b-dial-controls input,.b-scroll-mode .b-orbit-control input{height:4px;opacity:.65}
+@media(min-width:641px) and (max-height:700px){
+ .b-scroll-mode .b-intro{padding-block:90px 100px}
+ .b-scroll-mode .b-intro h1{font-size:clamp(40px,9svh,65px);margin-block:15px}
+ .b-scroll-mode .b-intro-copy>p{font-size:11px}
+ .b-scroll-mode .b-intro-copy>a{margin-top:15px}
+ .b-scroll-mode .b-clock-caption{bottom:20px;padding-top:13px}
+ .b-scroll-mode .b-story h2{font-size:36px}
+ .b-scroll-mode .b-story-top{margin-bottom:20px;gap:20px}
+ .b-scroll-mode .b-story-detail h3{font-size:24px;margin-bottom:14px}
+ .b-scroll-mode .b-distance h2{font-size:40px}
+ .b-scroll-mode .b-earth-scene{min-height:370px;padding-top:15px}
+ .b-scroll-mode .b-earth{width:225px;height:225px}
+ .b-scroll-mode .b-earth-orbit{top:70px;width:300px;height:130px}
+ .b-scroll-mode .b-orbit-control{margin-top:25px}
+}
+@media(max-width:640px){
+ .b-scroll-mode .b-intro{height:auto;min-height:0;padding:105px 7% 30px}
+ .b-scroll-mode .b-intro h1{font-size:55px;margin:25px 0 20px}
+ .b-scroll-mode .b-dial{width:100%}
+ .b-scroll-mode .b-dial-controls{margin-top:22px}
+ .b-scroll-mode .b-story{min-height:0;padding:60px 6% 40px}
+ .b-scroll-mode .b-story-track article{min-height:420px;padding:65px 8% 40px}
+ .b-scroll-mode .b-story-number{font-size:100px}
+ .b-scroll-mode .b-distance{min-height:0;padding:65px 7% 40px}
+ .b-scroll-mode .b-earth-scene{min-height:420px}
+}
+@media(max-width:380px){.b-scroll-mode .b-intro h1{font-size:48px}}
+@media(prefers-reduced-motion:reduce){.b-scroll-scene{height:auto!important}.b-scroll-scene>section{position:relative!important}.b-cone-hand,.b-earth-orbit,.b-earth{will-change:auto!important}}
+.b-scroll-mode .b-story-top>.b-eyebrow:after{content:'SCROLL TO TURN THE PAGE ↓';display:block;font-size:7px;font-weight:400;letter-spacing:1px;margin-top:14px;color:#9b7e6b}
+@media(prefers-reduced-motion:reduce){.b-scroll-mode .b-story-top>.b-eyebrow:after{display:none}}
