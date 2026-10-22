@@ -5,29 +5,48 @@
 
 ## 실행
 
-빌드 과정 없이 루트 디렉터리를 정적 서버로 실행하면 됩니다. 경로가 `/`로 시작하므로 `index.html`을 파일로 바로 열면 동작하지 않습니다.
+> **`npm install`은 필요 없습니다.** 이 저장소는 이미 빌드된 정적 파일이라 `package.json`이 없고, `npm install`을 실행하면 오류가 납니다.
+
+저장소 루트에서 정적 서버만 띄우면 됩니다. 경로가 `/`로 시작하므로 `index.html`을 파일로 바로 열면 동작하지 않습니다.
 
 ```bash
+node start-preview.mjs    # 별도 설치 없이 실행 → http://127.0.0.1:4175/
+# 또는
 npx serve .
 # 또는
 python3 -m http.server 4175
 ```
 
+포트를 바꾸려면 `PORT=3000 node start-preview.mjs`처럼 실행합니다.
+
 ## 페이지
 
-| 경로 | 내용 |
-|---|---|
-| `/` | 메인 (Moments · Icons · Look Closer · Time · Stories · Featured · Today · Your Moment · News) |
-| `/brandbook` | 단지, 기록으로 만나는 50년 |
-| `/icons/{banana-milk,bravo,samanco,yoplait}` | 제품별 상세 |
-| `/branding/` | 별도로 추가한 빙그레 브랜드 스토리 페이지 |
-| `/banana-milk/` | 별도로 추가한 바나나맛우유 페이지 |
-| `/banana-milk/bravo/` | 바나나맛우유에서 연결되는 부라보콘 페이지 |
+**Nuxt 빌드 페이지** (원본 빌드본, 수정하지 않음)
+
+| 경로 | 제목 | 내용 |
+|---|---|---|
+| `/` | 빙그레할 틈 | 메인 (Moments · Icons · Look Closer · Time · Stories · Featured · Today · Your Moment · News) |
+| `/brandbook` | 단지, 기록으로 만나는 50년 | 바나나맛우유 브랜드북 |
+| `/icons/samanco`, `/icons/yoplait` | 빙그레할 틈 | 제품별 상세 |
+| `/icons/banana-milk`, `/icons/bravo` | 빙그레할 틈 | 제품별 상세. 사이트 안의 링크는 각각 `/banana-milk/`, `/bravo/`로 연결됨 |
+
+**독립 페이지** (HTML/CSS/JS, 폴더별로 작업)
+
+| 경로 | 제목 | 작업 폴더 | 내용 |
+|---|---|---|---|
+| `/branding/` | 우리의 일상을, 빙그레 — Brand Story | `branding/` | 빙그레 브랜드 스토리 |
+| `/brand2/` | 빙그레 — 웃음의 기록 · Brand Story | `brand2/` | 브랜드 스토리 리디자인 시안 (공용 헤더 대신 자체 레이아웃) |
+| `/brand3/` | 우리의 모든 날에, 빙그레 — Brand Story | `brand3/` | 기존 브랜드 페이지 보완·디벨롭 시안 (연도 바로가기, 제품 섹션 추가) |
+| `/banana-milk/` | 바나나맛우유 — 단지, 행복한 순간 | `banana-milk/` | 바나나맛우유 제품 페이지 |
+| `/bravo/` | 부라보콘 — 하트 하나, 클래식 하나 | `bravo/` | 부라보콘 인터랙티브 제품 페이지 |
+| `/banana-milk/bravo/` | — | — | 예전 주소. `/bravo/`로 자동 이동 |
+
+메인 헤더와 모바일 메뉴에는 `enhancements/page-links.js`가 "브랜드", "바나나맛우유", "부라보콘" 링크를 추가합니다.
 
 ## 추가 페이지 작업 안내
 
 기존 메인, `/brandbook`, `/icons/banana-milk`는 변경하지 않았습니다.
-새로운 브랜드 페이지 작업은 `branding/`, 바나나맛우유 작업은 `banana-milk/`에서 진행합니다.
+새로운 브랜드 페이지 작업은 `branding/`, 바나나맛우유 작업은 `banana-milk/`, 부라보콘 작업은 `bravo/`에서 진행합니다.
 각 폴더에는 HTML, CSS, JavaScript와 필요한 이미지가 함께 들어 있습니다.
 기존 Nuxt 번들과 독립된 HTML 페이지이므로 기존 앱에서 연결할 때는
 `<a href="/branding/">브랜드 이야기</a>`, `<a href="/banana-milk/">바나나맛우유</a>`처럼
@@ -38,7 +57,9 @@ python3 -m http.server 4175
 
 ```
 index.html              # 메인 페이지 (SSR 결과 + __NUXT_DATA__)
-brandbook/, icons/      # 하위 페이지
+brandbook/, icons/      # 하위 페이지 (Nuxt 빌드)
+branding/, banana-milk/, bravo/   # 독립 페이지
+start-preview.mjs       # 로컬 미리보기 서버 (node start-preview.mjs)
 _startup-fixed/         # 메인 페이지가 쓰는 Nuxt 번들 (buildAssetsDir)
 _nuxt/                  # 하위 페이지가 쓰는 Nuxt 번들 (_startup-fixed와 내용 동일)
 _external/              # Google Fonts, Pretendard 로컬 사본
