@@ -1,11 +1,13 @@
-/* Match the homepage .page section / .container content edges.
-   Full-bleed section colors stay intact; only their inner content is inset.
+/* Match the homepage's outer section boundaries as well as its inner padding.
+   All product sections, colors and scroll scenes live inside one centered column.
    Homepage desktop: 75% centered width + clamp(16px,2.6vw,44px) padding.
-   Homepage 320–767px: 90% centered width + 2% section padding. */
+   Homepage 320–767px: 90% centered width + 2vw section padding. */
 .b-world.b-match-gutters {
+  width: 75%;
+  margin-inline: auto;
   --b-container-width: 75%;
   --b-container-padding: clamp(16px, 2.6vw, 44px);
-  --b-content-edge: calc((100% - var(--b-container-width)) / 2 + var(--b-container-padding));
+  --b-content-edge: var(--b-container-padding);
 }
 body .b-world.b-match-gutters :is(.b-intro,.b-story,.b-distance,.b-taste,.b-cutting,.b-love,.b-lineup,.b-brand-notes) {
   padding-inline: var(--b-content-edge);
@@ -72,7 +74,7 @@ body .b-world.b-match-gutters .b-gallery-arrows button {width:34px;height:34px}
   body .b-world.b-match-gutters .b-lineup-stage {height:780px}
 }
 @media(min-width:320px) and (max-width:767px) {
-  .b-world.b-match-gutters {--b-container-width:90%;--b-container-padding:2%}
+  .b-world.b-match-gutters {width:90%;--b-container-width:90%;--b-container-padding:2vw}
 }
 @media(max-width:640px) {
   body .b-world.b-match-gutters .b-intro h1 {font-size:55px}
