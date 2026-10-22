@@ -1,0 +1,97 @@
+/* Match the homepage's outer section boundaries as well as its inner padding.
+   All product sections, colors and scroll scenes live inside one centered column.
+   Homepage desktop: 75% centered width + clamp(16px,2.6vw,44px) padding.
+   Homepage 320–767px: 90% centered width + 2vw section padding. */
+.b-world.b-match-gutters {
+  width: 75%;
+  margin-inline: auto;
+  --b-container-width: 75%;
+  --b-container-padding: clamp(16px, 2.6vw, 44px);
+  --b-content-edge: var(--b-container-padding);
+}
+body .b-world.b-match-gutters :is(.b-intro,.b-story,.b-distance,.b-taste,.b-cutting,.b-love,.b-lineup,.b-brand-notes) {
+  padding-inline: var(--b-content-edge);
+  min-width: 0;
+}
+body .b-world.b-match-gutters .b-intro h1 {
+  font-size: clamp(42px, min(4.4vw, 9svh), 72px);
+  letter-spacing: -2px;
+}
+body .b-world.b-match-gutters .b-clock-caption {
+  left: var(--b-content-edge);
+  right: var(--b-content-edge);
+}
+.b-match-gutters :is(.b-intro-copy,.b-dial-scene,.b-distance-title,.b-earth-scene,.b-taste-side,.b-flavor-art,.b-cutting-copy,.b-cutting-demo,.b-love-copy,.b-heart-envelope) {min-width:0}
+body .b-world.b-match-gutters .b-story-top {grid-template-columns:1fr auto;gap:22px}
+body .b-world.b-match-gutters .b-story-top>.b-eyebrow {grid-column:1/-1}
+body .b-world.b-match-gutters .b-story h2 {font-size:clamp(32px,3.2vw,49px)}
+body .b-world.b-match-gutters .b-story-track article {gap:6%;padding-inline:6%}
+body .b-world.b-match-gutters .b-story-number {font-size:clamp(70px,10vw,145px)}
+body .b-world.b-match-gutters .b-story-detail h3 {font-size:clamp(24px,2.2vw,29px)}
+body .b-world.b-match-gutters .b-distance {gap:7%}
+body .b-world.b-match-gutters .b-earth {width:250px;height:250px}
+body .b-world.b-match-gutters .b-earth-orbit {width:320px;height:135px;top:95px}
+body .b-world.b-match-gutters .b-taste {gap:9%}
+body .b-world.b-match-gutters .b-taste h2,
+body .b-world.b-match-gutters .b-cutting-copy h2,
+body .b-world.b-match-gutters .b-love-copy h2 {font-size:clamp(34px,3.5vw,56px)}
+body .b-world.b-match-gutters .b-cutting {gap:9%}
+body .b-world.b-match-gutters .b-love-layout {gap:10%}
+body .b-world.b-match-gutters .b-envelope-back,
+body .b-world.b-match-gutters .b-envelope-front>span {font-size:clamp(280px,29vw,480px)}
+body .b-world.b-match-gutters .b-gallery-bottom {gap:20px}
+body .b-world.b-match-gutters .b-gallery-bottom .b-lineup-word>strong {font-size:clamp(35px,4.6vw,65px)}
+body .b-world.b-match-gutters .b-gallery-arrows {gap:7px}
+body .b-world.b-match-gutters .b-gallery-arrows button {width:34px;height:34px}
+@media(max-width:1000px) {
+  /* Keep content readable as the shared content column narrows. */
+  body .b-world.b-match-gutters .b-intro {height:auto;max-height:none;min-height:0;grid-template-columns:1fr;padding-top:110px;padding-bottom:35px;gap:30px}
+  body .b-world.b-match-gutters .b-intro h1 {font-size:clamp(42px,6vw,62px);margin-block:22px}
+  body .b-world.b-match-gutters .b-intro-copy {padding:0}
+  body .b-world.b-match-gutters .b-edition {display:none}
+  body .b-world.b-match-gutters .b-dial-scene {width:100%;max-width:500px;margin-inline:auto}
+  body .b-world.b-match-gutters .b-dial {width:100%}
+  body .b-world.b-match-gutters .b-clock-caption {position:static;grid-template-columns:1fr;gap:10px;padding-top:20px}
+  body .b-world.b-match-gutters .b-clock-caption>span {grid-row:auto}
+  body .b-world.b-match-gutters .b-distance,
+  body .b-world.b-match-gutters .b-taste,
+  body .b-world.b-match-gutters .b-cutting {grid-template-columns:1fr;gap:40px}
+  body .b-world.b-match-gutters .b-earth-scene {width:100%;max-width:440px;margin-inline:auto}
+  body .b-world.b-match-gutters .b-vinyl {width:min(100%,360px);margin-inline:auto}
+  body .b-world.b-match-gutters .b-cutting-copy {grid-row:1}
+  body .b-world.b-match-gutters .b-cutting-demo {max-width:440px;width:100%;margin-inline:auto}
+  body .b-world.b-match-gutters .b-love-layout {grid-template-columns:1fr;gap:65px}
+  body .b-world.b-match-gutters .b-heart-envelope {width:100%;max-width:380px;min-height:330px;margin-inline:auto}
+  body .b-world.b-match-gutters .b-envelope-back,
+  body .b-world.b-match-gutters .b-envelope-front>span {font-size:390px}
+  body .b-world.b-match-gutters .b-envelope-note>strong {font-size:27px}
+  body .b-world.b-match-gutters .b-lineup-options {display:flex;overflow-x:auto;justify-content:start;padding-block:8px 13px;scroll-snap-type:x mandatory;flex-wrap:nowrap}
+  body .b-world.b-match-gutters .b-lineup-options button {flex:0 0 136px;scroll-snap-align:start}
+  body .b-world.b-match-gutters .b-gallery-top>span:nth-child(2) {display:none}
+  body .b-world.b-match-gutters .b-gallery-bottom {grid-template-columns:1fr auto;gap:18px}
+  body .b-world.b-match-gutters .b-gallery-arrows {grid-column:2;grid-row:1;align-self:end}
+  body .b-world.b-match-gutters .b-choice-story {grid-column:1/-1}
+  body .b-world.b-match-gutters .b-lineup-stage {height:780px}
+}
+@media(min-width:320px) and (max-width:767px) {
+  .b-world.b-match-gutters {width:90%;--b-container-width:90%;--b-container-padding:2vw}
+}
+@media(max-width:640px) {
+  body .b-world.b-match-gutters .b-intro h1 {font-size:55px}
+  body .b-world.b-match-gutters .b-story-track article {padding-inline:8%}
+  body .b-world.b-match-gutters .b-story-number {font-size:100px}
+  body .b-world.b-match-gutters .b-story h2 {font-size:31px}
+  body .b-world.b-match-gutters .b-taste h2,
+  body .b-world.b-match-gutters .b-cutting-copy h2,
+  body .b-world.b-match-gutters .b-love-copy h2 {font-size:39px}
+  body .b-world.b-match-gutters .b-lineup-stage {height:720px}
+  body .b-world.b-match-gutters .b-gallery-bottom .b-lineup-word>strong {font-size:43px}
+  body .b-world.b-match-gutters .b-gallery-arrows button {width:31px;height:31px}
+}
+@media(max-width:380px) {
+  body .b-world.b-match-gutters .b-intro h1 {font-size:48px}
+  body .b-world.b-match-gutters .b-envelope-back,
+  body .b-world.b-match-gutters .b-envelope-front>span {font-size:340px}
+  body .b-world.b-match-gutters .b-heart-envelope {min-height:290px}
+  body .b-world.b-match-gutters .b-gallery-bottom .b-lineup-word>strong {font-size:37px}
+}
