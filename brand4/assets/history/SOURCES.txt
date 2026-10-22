@@ -1,0 +1,30 @@
+History gallery visual provenance — reviewed 2026-10-20
+
+Event facts: https://www.bing.co.kr/company/history
+
+milestone.png, vision.png, global.png, research.png, haccp.png, protein.png:
+Binggrae 2025 Sustainability Report, pages 9, 6, 8, 75, 76, 17 respectively.
+https://www.bing.co.kr/upload/esg/2025%EB%85%84%20%EB%B9%99%EA%B7%B8%EB%A0%88%20%EC%A7%80%EC%86%8D%EA%B0%80%EB%8A%A5%EA%B2%BD%EC%98%81%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf
+These are document excerpts/reference materials from 2025, not photographs or documents from the associated historical event year.
+
+identity.png: current Binggrae logo, https://www.bing.co.kr/img/main/logo-pc.png
+identity.svg: Korean vector logo replacing the 144px header bitmap.
+https://commons.wikimedia.org/wiki/File:Binggrae_logo_(Korean).svg
+https://upload.wikimedia.org/wikipedia/commons/9/9b/Binggrae_logo_%28Korean%29.svg
+Commons identifies this as a PD-textlogo; trademark rights remain applicable.
+Report diagram crops were re-rendered at 288dpi on 2026-10-20.
+Embedded raster originals are preserved; display sizes are limited to avoid over-enlargement.
+font.png: official Binggrae font example, https://www.bing.co.kr/img/sub/news/font_example_img01.png
+Source page: https://www.bing.co.kr/news/media_font
+portfolio.png: official 2026 business portfolio, https://www.bing.co.kr/img/sub/company/business/banner-2026.png
+Source page: https://www.bing.co.kr/company/business
+
+factory-2013.jpg: Ilyosisa, 2013 article photograph of Binggrae factory.
+https://www.ilyosisa.co.kr/news/article.html?no=32250
+https://www.ilyosisa.co.kr/data/photos/old/photos/20130310/art_1362468123.jpg
+Used as later context for the 1973 factory milestone, NOT a 1973 photograph.
+
+Existing product images referenced by history-gallery.js are contextual current product visuals,
+not launch-year packaging. Each on-page source label identifies this distinction.
+Copyright remains with the respective owners. Source attribution is not a reuse license;
+confirm image reuse permissions before commercial/public campaign use.
